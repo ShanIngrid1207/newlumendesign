@@ -168,36 +168,112 @@
   .mobile-menu a{font-family:"Space Grotesk",sans-serif;font-size:26px;font-weight:600;letter-spacing:-.03em;padding:13px 0;border-bottom:1px solid var(--hair)}
   .mobile-menu .btn{margin-top:20px;width:100%}
 
-  /* ---------- HERO ---------- */
-  .hero{position:relative;overflow:hidden;background:var(--ink)}
+  /* ---------- HERO (cinematic full-bleed video) ---------- */
+  .hero{
+    position:relative;overflow:hidden;background:var(--ink);
+    min-height:clamp(620px,94vh,940px);display:flex;align-items:center;
+  }
   .hero-media{position:absolute;inset:0;z-index:0}
   .hero-media video,.hero-media img{width:100%;height:100%;object-fit:cover}
   .hero-scrim{
     position:absolute;inset:0;z-index:1;
     background:
-      linear-gradient(180deg,rgba(10,11,14,.62) 0%,rgba(10,11,14,.30) 38%,rgba(10,11,14,.55) 78%,rgba(10,11,14,.86) 100%);
+      linear-gradient(180deg,rgba(10,11,14,.70) 0%,rgba(10,11,14,.34) 36%,rgba(10,11,14,.50) 72%,rgba(10,11,14,.90) 100%),
+      radial-gradient(120% 90% at 14% 28%,rgba(10,11,14,.55) 0%,rgba(10,11,14,0) 60%);
   }
-  .hero-inner{position:relative;z-index:2;text-align:center;padding:clamp(96px,15vh,168px) 0 clamp(64px,9vh,108px)}
+  /* left-weighted editorial hierarchy — NOT centered-everything */
+  .hero-inner{position:relative;z-index:2;width:100%;padding:clamp(112px,16vh,176px) 0 clamp(80px,11vh,128px)}
+  .hero-col{max-width:min(880px,92%)}
   .hero h1{
     color:#fff;
-    font-size:clamp(40px,7.4vw,82px);
-    line-height:1.02;letter-spacing:-.04em;font-weight:600;
-    max-width:16ch;margin:18px auto 0;
+    font-size:clamp(42px,7.6vw,88px);
+    line-height:1.0;letter-spacing:-.045em;font-weight:600;
+    max-width:15ch;margin:20px 0 0;
   }
+  .hero h1 .hl{display:block;overflow:hidden}
+  .hero h1 .hl > span{display:block}
+  .hero h1 em{font-style:normal;color:#6f9bff}
   .hero .sub{
-    color:rgba(255,255,255,.86);font-size:clamp(17px,2.1vw,21px);line-height:1.5;
-    max-width:60ch;margin:22px auto 0;font-weight:400;
+    color:rgba(255,255,255,.88);font-size:clamp(17px,2.05vw,21px);line-height:1.5;
+    max-width:56ch;margin:24px 0 0;font-weight:400;
   }
-  .hero .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+  .hero .cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:36px}
   .hero-trust{
-    margin-top:42px;display:flex;flex-direction:column;align-items:center;gap:14px;
-    color:rgba(255,255,255,.78);font-size:14.5px;
+    margin-top:42px;display:flex;flex-direction:column;align-items:flex-start;gap:14px;
+    color:rgba(255,255,255,.80);font-size:14.5px;
   }
-  .hero-trust .builds{display:flex;align-items:center;gap:10px 22px;flex-wrap:wrap;justify-content:center}
+  .hero-trust .builds{display:flex;align-items:center;gap:10px 22px;flex-wrap:wrap}
   .hero-trust .builds span{display:inline-flex;align-items:center;gap:8px;font-weight:500;color:#fff}
   .hero-trust .dot{width:5px;height:5px;border-radius:50%;background:#6f9bff}
-  .hero-trust .line{display:inline-flex;align-items:center;gap:9px}
-  .hero-trust .line svg{width:16px;height:16px;flex:0 0 auto;color:#6f9bff}
+  .hero-trust .line{display:inline-flex;align-items:flex-start;gap:9px;max-width:52ch}
+  .hero-trust .line svg{width:16px;height:16px;flex:0 0 auto;color:#6f9bff;margin-top:2px}
+
+  /* ---------- BENTO (asymmetric proof grid, immediately after hero) ---------- */
+  .bento-band{background:var(--white);padding:clamp(20px,4vw,40px) 0 clamp(72px,11vh,128px)}
+  .bento-band .b-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin:clamp(40px,7vw,72px) 0 clamp(26px,4vw,40px)}
+  .bento-band .b-head h2{font-size:clamp(26px,3.4vw,40px);line-height:1.06;letter-spacing:-.035em;max-width:18ch}
+  .bento-band .b-head p{color:var(--ink-55);font-size:16px;max-width:34ch;margin:0}
+  .bento{
+    display:grid;grid-template-columns:repeat(12,1fr);
+    grid-auto-rows:minmax(132px,auto);
+    gap:clamp(14px,1.8vw,22px);
+  }
+  .tile{
+    position:relative;border-radius:var(--r-lg);overflow:hidden;
+    border:1px solid var(--hair);background:var(--white);
+    display:flex;flex-direction:column;justify-content:space-between;
+    padding:clamp(22px,2.4vw,30px);will-change:transform;
+  }
+  .tile .t-eye{font-family:"Space Grotesk",sans-serif;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-40)}
+  .tile h3{font-size:clamp(20px,2.2vw,26px);line-height:1.1;letter-spacing:-.025em;margin:0}
+  .tile p{color:var(--ink-55);font-size:15px;line-height:1.5;margin:10px 0 0;max-width:30ch}
+  .tile .t-foot{margin-top:auto;padding-top:20px}
+  /* metric tile — the cobalt accent moment */
+  .tile.metric{background:var(--accent);border-color:var(--accent);color:#fff;justify-content:flex-end}
+  .tile.metric .t-eye{color:rgba(255,255,255,.72)}
+  .tile.metric .big{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:clamp(48px,6.4vw,76px);line-height:.92;letter-spacing:-.05em}
+  .tile.metric .big .u{color:rgba(255,255,255,.66)}
+  .tile.metric p{color:rgba(255,255,255,.86)}
+  /* primary feature tile */
+  .tile.feature{background:var(--parchment);border-color:var(--hair)}
+  .tile.feature .t-icon{width:42px;height:42px;border-radius:11px;background:var(--accent-tint);display:grid;place-items:center;margin-bottom:auto}
+  .tile.feature .t-icon svg{width:21px;height:21px;color:var(--accent)}
+  /* photo / media tiles */
+  .tile.media{padding:0;border:0;background:var(--ink)}
+  .tile.media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease-out);transform:scale(1.03)}
+  .tile.media:hover img{transform:scale(1.08)}
+  .tile.media .m-ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,11,14,.06) 38%,rgba(10,11,14,.80) 100%)}
+  .tile.media .m-meta{position:relative;z-index:1;margin-top:auto;color:#fff;padding:clamp(20px,2.2vw,26px)}
+  .tile.media .m-meta .loc{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#9bb6ff;display:flex;align-items:center;gap:8px}
+  .tile.media .m-meta h3{color:#fff;margin-top:7px}
+  /* recent builds list tile */
+  .tile.builds-list .blist{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:0}
+  .tile.builds-list .blist li{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 0;border-top:1px solid var(--hair);font-size:15.5px;color:var(--ink-80);font-weight:500}
+  .tile.builds-list .blist li:first-child{border-top:0}
+  .tile.builds-list .blist .trade{color:var(--ink-40);font-size:13px;font-weight:500}
+  /* span placement (asymmetric, real hierarchy) */
+  .t-feature{grid-column:span 5;grid-row:span 2}
+  .t-metric{grid-column:span 3;grid-row:span 2}
+  .t-photo{grid-column:span 4;grid-row:span 2}
+  .t-soft{grid-column:span 4;grid-row:span 1}
+  .t-builds{grid-column:span 8;grid-row:span 1}
+  @media(max-width:900px){
+    .bento{grid-auto-rows:minmax(120px,auto)}
+    .t-feature{grid-column:span 12;grid-row:span 2}
+    .t-metric{grid-column:span 6;grid-row:span 2}
+    .t-photo{grid-column:span 6;grid-row:span 2}
+    .t-soft{grid-column:span 6;grid-row:span 1}
+    .t-builds{grid-column:span 12;grid-row:span 1}
+  }
+  @media(max-width:560px){
+    .bento{grid-template-columns:1fr}
+    .t-feature,.t-metric,.t-photo,.t-soft,.t-builds{grid-column:span 1;grid-row:auto}
+    .tile.media,.t-photo{min-height:240px}
+    .t-metric{min-height:200px}
+  }
+  @media(max-width:760px){
+    .hero-trust{align-items:flex-start}
+  }
 
   /* ---------- Section scaffold ---------- */
   section{position:relative}
@@ -368,6 +444,7 @@
     *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important}
     .reveal{opacity:1;transform:none}
     .work-card img{transform:none !important}
+    .tile.media img{transform:none !important}
   }
 </style>
 </head>
@@ -408,37 +485,104 @@
   <a class="btn btn-primary" href="#audit">Get a free site audit</a>
 </div>
 
-<!-- ===================== HERO ===================== -->
+<!-- ===================== HERO (cinematic full-bleed video) ===================== -->
 <section class="hero" id="top">
   <div class="hero-media" aria-hidden="true">
     <video id="heroVideo" autoplay muted loop playsinline preload="metadata"
-           poster="https://picsum.photos/seed/lumenherobuild/1600/900">
-      <source src="https://videos.pexels.com/video-files/2098989/2098989-hd_1920_1080_30fps.mp4" type="video/mp4" />
+           poster="assets/web-build-poster.jpg">
+      <source src="assets/web-build-2.mp4" type="video/mp4" />
     </video>
   </div>
   <div class="hero-scrim" aria-hidden="true"></div>
   <div class="wrap hero-inner">
-    <span class="eyebrow on-dark">Performance marketing · Greater Phoenix</span>
-    <h1>Be the brightest result in your market.</h1>
-    <p class="sub">Lumen builds fast, mobile, search-ready websites for home-service, construction &amp; local businesses — engineered to rank on Google, load in under a second, and turn clicks into booked jobs.</p>
-    <div class="cta-row">
-      <a class="btn btn-primary btn-lg" href="#audit">Get a free site audit <svg class="arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h9M8 4l4 4-4 4"/></svg></a>
-      <a class="btn btn-ghost on-dark btn-lg" href="#services">See what's included</a>
+    <div class="hero-col">
+      <span class="eyebrow on-dark" data-hero="eyebrow">Performance marketing · Greater Phoenix</span>
+      <h1 id="heroH1">
+        <span class="hl"><span>Be the</span></span>
+        <span class="hl"><span><em>brightest result</em></span></span>
+        <span class="hl"><span>in your market.</span></span>
+      </h1>
+      <p class="sub" data-hero="sub">Lumen builds fast, mobile, search-ready websites for home-service, construction &amp; local businesses — engineered to rank on Google, load in under a second, and turn clicks into booked jobs.</p>
+      <div class="cta-row" data-hero="cta">
+        <a class="btn btn-primary btn-lg" href="#audit">Get a free site audit <svg class="arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h9M8 4l4 4-4 4"/></svg></a>
+        <a class="btn btn-ghost on-dark btn-lg" href="#services">See what's included</a>
+      </div>
+      <div class="hero-trust" data-hero="trust">
+        <div class="line">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 10l3.5 3.5L16 5"/></svg>
+          Built by contractors, for contractors · Serving Greater Phoenix &amp; the East Valley.
+        </div>
+        <div class="builds">
+          <span>Recent builds</span>
+          <span class="dot" aria-hidden="true"></span>
+          <span>Quest Roofing</span>
+          <span class="dot" aria-hidden="true"></span>
+          <span>Saguaro Cabinetry</span>
+          <span class="dot" aria-hidden="true"></span>
+          <span>Quest Drafting</span>
+        </div>
+      </div>
     </div>
-    <div class="hero-trust">
-      <div class="line">
-        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 10l3.5 3.5L16 5"/></svg>
-        Built by contractors, for contractors · Serving Greater Phoenix &amp; the East Valley.
-      </div>
-      <div class="builds">
-        <span>Recent builds</span>
-        <span class="dot" aria-hidden="true"></span>
-        <span>Quest Roofing</span>
-        <span class="dot" aria-hidden="true"></span>
-        <span>Saguaro Cabinetry</span>
-        <span class="dot" aria-hidden="true"></span>
-        <span>Quest Drafting</span>
-      </div>
+  </div>
+</section>
+
+<!-- ===================== BENTO (asymmetric proof grid) ===================== -->
+<section class="bento-band" aria-label="What Lumen builds, at a glance">
+  <div class="wrap">
+    <div class="b-head">
+      <h2>Everything pointed at one thing — more booked work.</h2>
+      <p>Fast sites, contractor software, and proof we ship — laid out the way real builds come together.</p>
+    </div>
+    <div class="bento" id="bento">
+      <!-- Website building (primary feature) -->
+      <article class="tile feature t-feature" data-tile>
+        <span class="t-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 8h18M7 12h7M7 15h4"/></svg>
+        </span>
+        <div class="t-foot">
+          <span class="t-eye">Available now</span>
+          <h3>Website building</h3>
+          <p>Fast, mobile-first sites with the SEO foundations baked in — every page pointed at getting the phone to ring.</p>
+        </div>
+      </article>
+
+      <!-- 0.8s load (cobalt metric) -->
+      <article class="tile metric t-metric" data-tile>
+        <span class="t-eye">Real-phone load</span>
+        <div class="big">0.8<span class="u">s</span></div>
+        <p>Under a second on real phones, on real networks.</p>
+      </article>
+
+      <!-- Work photo -->
+      <article class="tile media t-photo" data-tile>
+        <img src="https://loremflickr.com/1100/1300/construction,contractor?lock=7" width="1100" height="1300" loading="lazy"
+             onerror="this.onerror=null;this.src='https://picsum.photos/seed/lumenbento1/1100/1300';"
+             alt="Contractor reviewing a fast, mobile-first website on a phone at a job site in Greater Phoenix" />
+        <div class="m-ov" aria-hidden="true"></div>
+        <div class="m-meta">
+          <span class="loc"><span class="dot" style="width:5px;height:5px;border-radius:50%;background:#9bb6ff;display:inline-block"></span>Queen Creek, AZ</span>
+          <h3>Built for the field.</h3>
+        </div>
+      </article>
+
+      <!-- Software for contractors -->
+      <article class="tile feature t-soft" data-tile>
+        <div class="t-foot" style="padding-top:0">
+          <span class="t-eye">Early access</span>
+          <h3>Software for contractors</h3>
+          <p>The back-office tools that usually live in a dozen spreadsheets — pipelines, estimating, proposals.</p>
+        </div>
+      </article>
+
+      <!-- Recent builds list -->
+      <article class="tile builds-list t-builds" data-tile>
+        <span class="t-eye">Recent builds</span>
+        <ul class="blist">
+          <li>Quest Roofing <span class="trade">Roofing · Queen Creek</span></li>
+          <li>Saguaro Cabinetry <span class="trade">Cabinetry · Gilbert</span></li>
+          <li>Quest Drafting <span class="trade">Drafting · Greater Phoenix</span></li>
+        </ul>
+      </article>
     </div>
   </div>
 </section>
@@ -803,10 +947,14 @@
   </div>
 </footer>
 
+<!-- GSAP 3.12.5 + ScrollTrigger (cdnjs) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
 (function(){
   "use strict";
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var hasGSAP = !!(window.gsap && window.ScrollTrigger);
 
   /* Nav scrolled state */
   var nav = document.getElementById("nav");
@@ -831,48 +979,137 @@
     });
   }
 
-  /* Reveal on scroll */
+  /* ---- Static fallback helpers (used if GSAP CDN fails OR reduced motion) ---- */
   var revs = Array.prototype.slice.call(document.querySelectorAll(".reveal"));
-  if(reduce || !("IntersectionObserver" in window)){
-    revs.forEach(function(el){ el.classList.add("in"); });
-  } else {
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
-      });
-    }, {threshold:.12, rootMargin:"0px 0px -8% 0px"});
-    revs.forEach(function(el){ io.observe(el); });
+  function showAllReveals(){ revs.forEach(function(el){ el.classList.add("in"); }); }
+
+  function setCountFinal(el){ el.textContent = String(parseFloat(el.getAttribute("data-to"))); }
+  function finishAllCounts(){
+    var s = document.getElementById("stats");
+    if(s) s.querySelectorAll(".count").forEach(setCountFinal);
   }
 
-  /* Animated counters */
-  function animateCount(el){
-    var to = parseFloat(el.getAttribute("data-to"));
-    if(reduce){ el.textContent = String(to); return; }
-    var dur = 1100, start = null;
-    function step(ts){
-      if(start===null) start = ts;
-      var p = Math.min((ts-start)/dur, 1);
-      var eased = 1 - Math.pow(1-p, 3);
-      el.textContent = String(Math.round(to * eased));
-      if(p<1) requestAnimationFrame(step);
-      else el.textContent = String(to);
-    }
-    requestAnimationFrame(step);
-  }
-  var statsWrap = document.getElementById("stats");
-  if(statsWrap){
-    if(!("IntersectionObserver" in window) || reduce){
-      statsWrap.querySelectorAll(".count").forEach(animateCount);
-    } else {
-      var sObs = new IntersectionObserver(function(entries){
-        entries.forEach(function(e){
-          if(e.isIntersecting){
-            statsWrap.querySelectorAll(".count").forEach(animateCount);
-            sObs.disconnect();
-          }
+  /* ============================================================
+     GSAP — hero entrance + ScrollTrigger reveals/parallax/counts.
+     Initial hidden states are set via gsap.set() (NOT CSS) so that
+     if the CDN fails to load, ALL content stays fully visible.
+     ============================================================ */
+  if(hasGSAP){
+    gsap.registerPlugin(ScrollTrigger);
+
+    var mm = gsap.matchMedia();
+
+    /* ---- MOTION branch: only when user has no motion objection ---- */
+    mm.add("(prefers-reduced-motion: no-preference)", function(){
+      /* HERO entrance timeline — headline lines reveal over the video */
+      var lines = gsap.utils.toArray("#heroH1 .hl > span");
+      gsap.set(lines, {yPercent:115});
+      gsap.set('[data-hero="eyebrow"],[data-hero="sub"],[data-hero="cta"],[data-hero="trust"]', {opacity:0, y:22});
+
+      var tl = gsap.timeline({delay:.15, defaults:{ease:"power3.out"}});
+      tl.to('[data-hero="eyebrow"]', {opacity:1, y:0, duration:.6})
+        .to(lines, {yPercent:0, duration:.9, stagger:.10}, "-=.30")
+        .to('[data-hero="sub"]', {opacity:1, y:0, duration:.7}, "-=.45")
+        .to('[data-hero="cta"]', {opacity:1, y:0, duration:.6}, "-=.40")
+        .to('[data-hero="trust"]', {opacity:1, y:0, duration:.6}, "-=.40");
+
+      /* BENTO tiles — staggered parallax-in on scroll */
+      var tiles = gsap.utils.toArray("#bento [data-tile]");
+      gsap.set(tiles, {opacity:0, y:46});
+      ScrollTrigger.batch(tiles, {
+        start:"top 86%",
+        onEnter:function(batch){
+          gsap.to(batch, {opacity:1, y:0, duration:.85, ease:"power3.out", stagger:.10, overwrite:true});
+        }
+      });
+      /* continuous parallax drift — tiles ease at different rates */
+      tiles.forEach(function(t, i){
+        var depth = (i % 2 === 0) ? -26 : -12;
+        gsap.fromTo(t, {y:Math.abs(depth)}, {
+          y:depth, ease:"none",
+          scrollTrigger:{trigger:t, start:"top bottom", end:"bottom top", scrub:true}
         });
-      }, {threshold:.4});
-      sObs.observe(statsWrap);
+      });
+
+      /* Generic section reveals -> GSAP ScrollTrigger */
+      revs.forEach(function(el){
+        var d = parseInt(el.getAttribute("data-d")||"0",10);
+        gsap.set(el, {opacity:0, y:26});
+        gsap.to(el, {
+          opacity:1, y:0, duration:.8, ease:"power3.out", delay:d*0.07,
+          scrollTrigger:{trigger:el, start:"top 88%"}
+        });
+      });
+
+      /* Count-ups via ScrollTrigger */
+      var statsWrap = document.getElementById("stats");
+      if(statsWrap){
+        statsWrap.querySelectorAll(".count").forEach(function(el){
+          var to = parseFloat(el.getAttribute("data-to"));
+          var obj = {v:0};
+          ScrollTrigger.create({
+            trigger:statsWrap, start:"top 80%", once:true,
+            onEnter:function(){
+              gsap.to(obj, {v:to, duration:1.1, ease:"power2.out",
+                onUpdate:function(){ el.textContent = String(Math.round(obj.v)); },
+                onComplete:function(){ el.textContent = String(to); }});
+            }
+          });
+        });
+      }
+
+      return function(){ /* cleanup: matchMedia reverts gsap.set/animations */ };
+    });
+
+    /* ---- REDUCED-MOTION branch: static, everything visible ---- */
+    mm.add("(prefers-reduced-motion: reduce)", function(){
+      showAllReveals();
+      finishAllCounts();
+      gsap.set("#bento [data-tile]", {clearProps:"all"});
+    });
+
+  } else {
+    /* ---- NO GSAP (CDN failed): plain IntersectionObserver fallback ---- */
+    if(reduce || !("IntersectionObserver" in window)){
+      showAllReveals();
+    } else {
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
+        });
+      }, {threshold:.12, rootMargin:"0px 0px -8% 0px"});
+      revs.forEach(function(el){ io.observe(el); });
+    }
+
+    function animateCount(el){
+      var to = parseFloat(el.getAttribute("data-to"));
+      if(reduce){ el.textContent = String(to); return; }
+      var dur = 1100, start = null;
+      function step(ts){
+        if(start===null) start = ts;
+        var p = Math.min((ts-start)/dur, 1);
+        var eased = 1 - Math.pow(1-p, 3);
+        el.textContent = String(Math.round(to * eased));
+        if(p<1) requestAnimationFrame(step);
+        else el.textContent = String(to);
+      }
+      requestAnimationFrame(step);
+    }
+    var statsWrap = document.getElementById("stats");
+    if(statsWrap){
+      if(!("IntersectionObserver" in window) || reduce){
+        statsWrap.querySelectorAll(".count").forEach(animateCount);
+      } else {
+        var sObs = new IntersectionObserver(function(entries){
+          entries.forEach(function(e){
+            if(e.isIntersecting){
+              statsWrap.querySelectorAll(".count").forEach(animateCount);
+              sObs.disconnect();
+            }
+          });
+        }, {threshold:.4});
+        sObs.observe(statsWrap);
+      }
     }
   }
 

@@ -131,27 +131,21 @@ header.scrolled{background:color-mix(in srgb,var(--paper) 88%,transparent);backd
 .nav-toggle{display:none;width:42px;height:42px;border-radius:var(--r-ctrl);box-shadow:inset 0 0 0 1.5px var(--bone);align-items:center;justify-content:center}
 .nav-toggle svg{width:20px;height:20px}
 
-/* ============================================================ HERO */
-.hero{position:relative;padding-top:clamp(36px,6vw,68px);padding-bottom:clamp(40px,6vw,72px)}
-.hero-grid{display:grid;grid-template-columns:1.06fr .94fr;gap:clamp(28px,4vw,56px);align-items:end}
-.hero-copy{max-width:620px}
+/* ============================================================ HERO — DASHBOARD BENTO */
+.hero{position:relative;padding-top:clamp(28px,5vw,60px);padding-bottom:clamp(40px,6vw,72px)}
+.hero-grid{
+  display:grid;grid-template-columns:1.02fr 1.18fr;
+  gap:clamp(28px,3.4vw,48px);align-items:center;
+}
+.hero-copy{max-width:600px}
 .hero h1{
-  font-size:clamp(44px,7.4vw,84px);font-weight:600;line-height:.96;
-  margin:22px 0 0;letter-spacing:-.035em;
+  font-size:clamp(42px,6.6vw,78px);font-weight:600;line-height:.97;
+  margin:20px 0 0;letter-spacing:-.035em;
 }
-.hero h1 .glow{
-  position:relative;white-space:nowrap;
-}
-.hero h1 .glow::after{
-  content:"";position:absolute;left:-2%;right:-2%;bottom:.1em;height:.42em;
-  background:var(--amber);z-index:-1;border-radius:2px;
-  transform:scaleX(0);transform-origin:left;
-  animation:swipe 1s var(--ease-out) .45s forwards;
-}
-@keyframes swipe{to{transform:scaleX(1)}}
+.hero h1 .glow{position:relative;white-space:nowrap;color:var(--amber-deep)}
 .hero p.sub{font-size:clamp(16px,1.7vw,18.5px);color:var(--ink-soft);margin-top:24px;max-width:540px;line-height:1.55}
-.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
-.trust{margin-top:30px;padding-top:22px;border-top:1px solid var(--bone)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.trust{margin-top:28px;padding-top:20px;border-top:1px solid var(--bone)}
 .trust p{font-family:var(--f-mono);font-size:12.5px;color:var(--fog);letter-spacing:.02em;line-height:1.6}
 .builds{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 .build-chip{
@@ -161,23 +155,68 @@ header.scrolled{background:color-mix(in srgb,var(--paper) 88%,transparent);backd
 }
 .build-chip::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--amber-deep)}
 
-/* hero media */
-.hero-media{position:relative;border-radius:var(--r-card);overflow:hidden;background:var(--limestone-2);aspect-ratio:4/5;box-shadow:inset 0 0 0 1px var(--bone)}
-.hero-media video,.hero-media .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.hero-media .poster{transition:opacity .6s ease}
-.hero-media.playing .poster{opacity:0}
-.hero-media .scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,18,12,.06) 0%,rgba(20,18,12,.34) 78%,rgba(20,18,12,.5) 100%)}
-.media-tag{
-  position:absolute;left:14px;bottom:14px;right:14px;display:flex;justify-content:space-between;align-items:flex-end;gap:12px;
+/* --- BENTO GRID --- (4px rhythm) */
+.bento{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  grid-template-rows:auto auto auto;
+  gap:12px;
+  grid-template-areas:
+    "audit audit"
+    "video stat1"
+    "video stat2"
+    "builds builds";
 }
-.media-tag .pill{
-  font-family:var(--f-mono);font-size:11.5px;letter-spacing:.05em;color:#fff;
-  background:rgba(20,18,12,.55);backdrop-filter:blur(4px);
-  padding:6px 12px;border-radius:var(--r-pill);
+.bcard{
+  position:relative;border-radius:var(--r-card);background:var(--limestone);
+  box-shadow:inset 0 0 0 1px var(--bone);overflow:hidden;
+  padding:20px;display:flex;flex-direction:column;
 }
-.media-tag .live{display:inline-flex;align-items:center;gap:7px}
-.media-tag .live .dot{width:7px;height:7px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 0 rgba(241,196,10,.6);animation:pulse 2s infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(241,196,10,.55)}70%{box-shadow:0 0 0 8px rgba(241,196,10,0)}100%{box-shadow:0 0 0 0 rgba(241,196,10,0)}}
+.bcard .bhd{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.bcard .blab{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--fog)}
+.bcard .bsig{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.05em;color:var(--amber-deep);display:inline-flex;align-items:center;gap:6px}
+.bcard .bsig .dot{width:6px;height:6px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 0 rgba(241,196,10,.55);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(241,196,10,.55)}70%{box-shadow:0 0 0 7px rgba(241,196,10,0)}100%{box-shadow:0 0 0 0 rgba(241,196,10,0)}}
+
+/* audit-score card (dark surface = signal) */
+.b-audit{grid-area:audit;background:var(--char);box-shadow:none;color:var(--paper)}
+.b-audit .blab{color:#b6ad9b}
+.b-audit .score-row{display:flex;align-items:flex-end;gap:14px;margin-top:18px}
+.b-audit .score-num{font-family:var(--f-disp);font-weight:600;font-size:clamp(48px,7vw,68px);line-height:.86;letter-spacing:-.03em;color:var(--paper)}
+.b-audit .score-num .slash{color:var(--amber);font-size:.42em;font-weight:500}
+.b-audit .score-cap{font-family:var(--f-mono);font-size:11.5px;color:#b6ad9b;line-height:1.5;padding-bottom:6px;max-width:18ch}
+.b-audit .track{margin-top:18px;height:8px;border-radius:var(--r-pill);background:rgba(255,255,255,.1);overflow:hidden;position:relative}
+.b-audit .fill{position:absolute;inset:0;width:0;border-radius:var(--r-pill);background:linear-gradient(90deg,var(--amber-deep),var(--amber));transform-origin:left}
+.b-audit .ticks{display:flex;justify-content:space-between;margin-top:8px;font-family:var(--f-mono);font-size:10px;color:#867f70;letter-spacing:.04em}
+
+/* stat tiles */
+.b-stat{justify-content:space-between}
+.b-stat1{grid-area:stat1}
+.b-stat2{grid-area:stat2}
+.b-stat .snum{font-family:var(--f-disp);font-weight:600;font-size:clamp(30px,4vw,40px);line-height:1;letter-spacing:-.03em;margin-top:16px}
+.b-stat .snum .u{color:var(--amber-deep)}
+.b-stat .scap{font-family:var(--f-mono);font-size:11px;color:var(--fog);margin-top:8px;letter-spacing:.02em;line-height:1.45}
+
+/* video tile */
+.b-video{grid-area:video;padding:0;background:var(--limestone-2)}
+.b-video video,.b-video .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.b-video .poster{transition:opacity .6s ease}
+.b-video.playing .poster{opacity:0}
+.b-video .scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,18,12,.04) 0%,rgba(20,18,12,.18) 55%,rgba(20,18,12,.62) 100%)}
+.b-video .vtag{position:absolute;left:14px;right:14px;bottom:14px;z-index:2;display:flex;flex-direction:column;gap:8px}
+.b-video .vlab{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.78)}
+.b-video .vttl{font-family:var(--f-disp);font-weight:600;font-size:16px;color:#fff;letter-spacing:-.01em;line-height:1.15}
+
+/* builds chip tile */
+.b-builds{grid-area:builds;flex-direction:row;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.b-builds .bbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--fog)}
+.b-builds .bchips{display:flex;flex-wrap:wrap;gap:8px}
+.b-builds .bchip{
+  font-family:var(--f-disp);font-weight:500;font-size:12.5px;color:var(--ink-soft);
+  padding:6px 12px;border-radius:var(--r-pill);background:var(--paper);
+  box-shadow:inset 0 0 0 1px var(--bone);display:inline-flex;align-items:center;gap:7px;
+}
+.b-builds .bchip::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--amber-deep)}
 
 /* ============================================================ STATS */
 .stats{background:var(--ink);color:var(--paper);border-radius:var(--r-card);overflow:hidden}
@@ -341,8 +380,9 @@ footer{background:var(--ink);color:var(--paper);padding-top:clamp(54px,6vw,84px)
 
 /* ============================================================ RESPONSIVE */
 @media (max-width:980px){
-  .hero-grid{grid-template-columns:1fr;gap:30px}
-  .hero-media{aspect-ratio:16/11;order:-1}
+  .hero-grid{grid-template-columns:1fr;gap:28px}
+  .bento{order:-1}
+  .b-video{min-height:200px}
   .services{grid-template-columns:1fr}
   .work-grid{grid-template-columns:1fr 1fr;grid-template-rows:none}
   .work-card:nth-child(1){grid-row:auto;grid-column:1 / -1;aspect-ratio:16/9}
@@ -368,6 +408,28 @@ footer{background:var(--ink);color:var(--paper);padding-top:clamp(54px,6vw,84px)
   .stat:nth-child(2),.stat:nth-child(4){box-shadow:inset 1px 0 0 rgba(255,255,255,.09)}
   .stat:nth-child(4){box-shadow:inset 1px 0 0 rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.09)}
   .row2{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .bento{
+    grid-template-columns:1fr 1fr;
+    grid-template-areas:
+      "audit audit"
+      "stat1 stat2"
+      "video video"
+      "builds builds";
+  }
+  .b-video{min-height:200px}
+}
+@media (max-width:380px){
+  .bento{
+    grid-template-columns:1fr;
+    grid-template-areas:
+      "audit"
+      "stat1"
+      "stat2"
+      "video"
+      "builds";
+  }
 }
 @media (max-width:480px){
   .work-grid{grid-template-columns:1fr}
@@ -449,14 +511,14 @@ footer{background:var(--ink);color:var(--paper);padding-top:clamp(54px,6vw,84px)
 <section class="hero wrap" id="hero">
   <div class="hero-grid">
     <div class="hero-copy">
-      <span class="kicker">Performance marketing · Greater Phoenix</span>
-      <h1>Be the <span class="glow">brightest</span> result in your market.</h1>
-      <p class="sub">Lumen builds fast, mobile, search-ready websites for home-service, construction &amp; local businesses — engineered to rank on Google, load in under a second, and turn clicks into booked jobs.</p>
-      <div class="hero-cta">
+      <span class="kicker" data-hero="copy">Performance marketing · Greater Phoenix</span>
+      <h1 data-hero="copy">Be the <span class="glow">brightest result</span> in your market.</h1>
+      <p class="sub" data-hero="copy">Lumen builds fast, mobile, search-ready websites for home-service, construction &amp; local businesses — engineered to rank on Google, load in under a second, and turn clicks into booked jobs.</p>
+      <div class="hero-cta" data-hero="copy">
         <a class="btn btn-amber" href="#audit">Get a free site audit <span class="arw">→</span></a>
         <a class="btn btn-ghost" href="#services">See what's included</a>
       </div>
-      <div class="trust">
+      <div class="trust" data-hero="copy">
         <p>Built by contractors, for contractors · Serving Greater Phoenix &amp; the East Valley.</p>
         <div class="builds">
           <span class="build-chip">Quest Roofing</span>
@@ -466,16 +528,56 @@ footer{background:var(--ink);color:var(--paper);padding-top:clamp(54px,6vw,84px)
       </div>
     </div>
 
-    <div class="hero-media" id="heroMedia">
-      <img class="poster" src="https://loremflickr.com/1200/1500/construction,site,crane?lock=88" width="1200" height="1500" alt="Aerial view of an active construction site in Greater Phoenix" fetchpriority="high" />
-      <video id="heroVid" muted loop playsinline preload="none" poster="https://loremflickr.com/1200/1500/construction,site,crane?lock=88" aria-hidden="true">
-        <source src="https://videos.pexels.com/video-files/2098989/2098989-sd_960_540_30fps.mp4" type="video/mp4" />
-        <source src="https://videos.pexels.com/video-files/2098989/2098989-hd_1920_1080_30fps.mp4" type="video/mp4" />
-      </video>
-      <div class="scrim"></div>
-      <div class="media-tag">
-        <span class="pill">Built in the East Valley</span>
-        <span class="pill live"><span class="dot"></span>Ranking on Google</span>
+    <div class="bento" aria-label="Lumen performance snapshot">
+      <!-- 1 · Site audit score -->
+      <div class="bcard b-audit" data-hero="card">
+        <div class="bhd">
+          <span class="blab">Site audit score</span>
+          <span class="bsig"><span class="dot"></span>Live benchmark</span>
+        </div>
+        <div class="score-row">
+          <div class="score-num"><span id="auditScore" data-score="94">94</span><span class="slash">/100</span></div>
+          <p class="score-cap">Avg. score of a Lumen build at launch</p>
+        </div>
+        <div class="track" role="img" aria-label="Audit score 94 out of 100">
+          <span class="fill" id="auditFill"></span>
+        </div>
+        <div class="ticks"><span>Slow &amp; unfound</span><span>Top of Google</span></div>
+      </div>
+
+      <!-- 3 · Video tile (local web-design build) -->
+      <div class="bcard b-video" id="heroMedia" data-hero="card">
+        <img class="poster" src="assets/web-build-poster.jpg" width="1200" height="1500" alt="Designer building a contractor website on a laptop" fetchpriority="high" />
+        <video id="heroVid" muted autoplay loop playsinline preload="none" poster="assets/web-build-poster.jpg" aria-hidden="true">
+          <source src="assets/web-build-2.mp4" type="video/mp4" />
+        </video>
+        <div class="scrim"></div>
+        <div class="vtag">
+          <span class="vlab">In the build</span>
+          <span class="vttl">Custom sites, built in the East Valley</span>
+        </div>
+      </div>
+
+      <!-- 2 · Stat tiles -->
+      <div class="bcard b-stat b-stat1" data-hero="card">
+        <span class="blab">Mobile load</span>
+        <div class="snum">0.<span data-count="8">0</span><span class="u">s</span></div>
+        <p class="scap">Under a second on phones</p>
+      </div>
+      <div class="bcard b-stat b-stat2" data-hero="card">
+        <span class="blab">Local ranking</span>
+        <div class="snum">Top-<span data-count="3">0</span></div>
+        <p class="scap">Where we aim in your market</p>
+      </div>
+
+      <!-- 4 · Recent builds chips -->
+      <div class="bcard b-builds" data-hero="card">
+        <span class="bbl">Recent builds</span>
+        <div class="bchips">
+          <span class="bchip">Quest Roofing</span>
+          <span class="bchip">Saguaro Cabinetry</span>
+          <span class="bchip">Quest Drafting</span>
+        </div>
       </div>
     </div>
   </div>
@@ -746,10 +848,14 @@ footer{background:var(--ink);color:var(--paper);padding-top:clamp(54px,6vw,84px)
   </div>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
 (function(){
   "use strict";
   var rm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasGSAP = typeof window.gsap !== 'undefined';
+  if(hasGSAP && window.ScrollTrigger){ gsap.registerPlugin(ScrollTrigger); }
 
   /* sticky header style */
   var hd = document.getElementById('hd');
@@ -768,21 +874,11 @@ footer{background:var(--ink);color:var(--paper);padding-top:clamp(54px,6vw,84px)
     }
   });
 
-  /* reveal on scroll */
-  var revs = document.querySelectorAll('.reveal');
-  if(rm || !('IntersectionObserver' in window)){ revs.forEach(function(r){r.classList.add('in');}); }
-  else{
-    var io = new IntersectionObserver(function(es){
-      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, {threshold:.14, rootMargin:'0px 0px -8% 0px'});
-    revs.forEach(function(r){ io.observe(r); });
-  }
-
-  /* counters */
-  function animateCount(el){
+  /* count-up helper (used by both GSAP and fallback) */
+  function countUp(el, dur){
     var target = parseFloat(el.getAttribute('data-count'));
-    if(rm){ el.textContent = target; return; }
-    var dur = 1300, start = null;
+    if(rm || !dur){ el.textContent = target; return; }
+    var start = null;
     function step(ts){
       if(!start) start = ts;
       var p = Math.min((ts-start)/dur, 1);
@@ -793,15 +889,63 @@ footer{background:var(--ink);color:var(--paper);padding-top:clamp(54px,6vw,84px)
     }
     requestAnimationFrame(step);
   }
-  var statBox = document.querySelector('.stats');
-  if(statBox){
-    var seen=false;
-    var sio = new IntersectionObserver(function(es){
-      es.forEach(function(e){
-        if(e.isIntersecting && !seen){ seen=true; document.querySelectorAll('[data-count]').forEach(animateCount); sio.disconnect(); }
+  var counters = document.querySelectorAll('[data-count]');
+  var scoreEl = document.getElementById('auditScore');
+  var fillEl = document.getElementById('auditFill');
+  var revs = document.querySelectorAll('.reveal');
+  var heroCards = document.querySelectorAll('[data-hero="card"]');
+  var heroCopy = document.querySelectorAll('[data-hero="copy"]');
+
+  /* ---- STATIC FALLBACK (no GSAP, or reduced motion): everything visible ---- */
+  function showAllStatic(){
+    revs.forEach(function(r){ r.classList.add('in'); });
+    heroCards.forEach(function(c){ c.style.opacity=1; c.style.transform='none'; c.style.clipPath='none'; });
+    heroCopy.forEach(function(c){ c.style.opacity=1; c.style.transform='none'; });
+    counters.forEach(function(el){ el.textContent = parseFloat(el.getAttribute('data-count')); });
+    if(scoreEl) scoreEl.textContent = scoreEl.getAttribute('data-score');
+    if(fillEl){ fillEl.style.width = (scoreEl ? scoreEl.getAttribute('data-score') : 94) + '%'; }
+  }
+
+  if(!hasGSAP || rm){
+    showAllStatic();
+  } else {
+    /* set initial hidden states in JS so content stays visible if CDN/JS fails */
+    gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', function(){
+      gsap.set(heroCopy, {opacity:0, y:18});
+      gsap.set(heroCards, {opacity:0, y:24, clipPath:'inset(0 0 14% 0)'});
+      gsap.set(fillEl, {width:'0%'});
+
+      /* HERO ENTRANCE TIMELINE */
+      var scoreTarget = scoreEl ? parseFloat(scoreEl.getAttribute('data-score')) : 94;
+      var scoreObj = {v:0};
+      var tl = gsap.timeline({defaults:{ease:'power3.out'}});
+      tl.to(heroCopy, {opacity:1, y:0, duration:.7, stagger:.08}, 0)
+        .to(heroCards, {opacity:1, y:0, clipPath:'inset(0 0 0% 0)', duration:.7, stagger:.09}, .18)
+        .to(fillEl, {width:scoreTarget+'%', duration:1.1, ease:'power2.out'}, .5)
+        .to(scoreObj, {v:scoreTarget, duration:1.1, ease:'power2.out',
+          onUpdate:function(){ if(scoreEl) scoreEl.textContent = Math.round(scoreObj.v); }}, .5);
+
+      /* SCROLL REVEALS via ScrollTrigger */
+      revs.forEach(function(r){
+        gsap.fromTo(r, {opacity:0, y:22}, {
+          opacity:1, y:0, duration:.7, ease:'power3.out',
+          scrollTrigger:{trigger:r, start:'top 88%', once:true}
+        });
       });
-    }, {threshold:.4});
-    sio.observe(statBox);
+
+      /* COUNT-UPS via ScrollTrigger */
+      counters.forEach(function(el){
+        ScrollTrigger.create({
+          trigger:el, start:'top 92%', once:true,
+          onEnter:function(){ countUp(el, 1300); }
+        });
+      });
+
+      return function(){ showAllStatic(); }; /* cleanup -> static */
+    });
+
+    /* If matchMedia branch didn't run (reduced motion), ensure visible */
+    gsap.matchMedia().add('(prefers-reduced-motion: reduce)', function(){ showAllStatic(); });
   }
 
   /* hero video — lazy, reduced-motion = poster only */

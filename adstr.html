@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lumen — Performance Websites for Greater Phoenix Contractors</title>
+<meta name="description" content="Lumen builds fast, search-ready websites for home-service and construction businesses across Greater Phoenix. Engineered to load under a second and turn clicks into booked jobs." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&family=Spline+Sans+Mono:wght@500;600&display=swap" rel="stylesheet" />
+
+<!-- GSAP (deferred → runs before DOMContentLoaded). Page is fully animated without it; GSAP only enhances entrances. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+<style>
+  :root{
+    --bg:#f7f5ef; --panel:#fffdf8; --ink:#14160f; --ink-soft:#33372a;
+    --muted:#62675a; --line:#e6e3d8; --line-2:#d9d6c9;
+    --lime:#c8f24a; --lime-deep:#a4d400; --lime-ink:#1a1d12;
+    --r-lg:26px; --r-md:16px; --r-sm:11px;
+    --maxw:1320px;
+    --ease:cubic-bezier(.22,1,.36,1);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Manrope",system-ui,sans-serif; font-size:17px; line-height:1.6;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  a{color:inherit; text-decoration:none}
+  img,video{display:block; max-width:100%}
+  .wrap{width:min(100% - 44px, var(--maxw)); margin-inline:auto}
+  .mono{font-family:"Spline Sans Mono",monospace; font-weight:500; letter-spacing:.04em}
+  .eyebrow{
+    font-family:"Spline Sans Mono",monospace; font-size:.74rem; font-weight:600;
+    letter-spacing:.18em; text-transform:uppercase; color:var(--muted);
+    display:inline-flex; align-items:center; gap:.6em;
+  }
+  .eyebrow .dot{width:8px; height:8px; border-radius:50%; background:var(--lime-deep)}
+
+  /* ---------- custom cursor ---------- */
+  .cursor,.cursor-ring{position:fixed; top:0; left:0; pointer-events:none; z-index:9999; border-radius:50%;
+    transform:translate(-50%,-50%); will-change:transform; opacity:0}
+  .cursor{width:7px; height:7px; background:var(--ink)}
+  .cursor-ring{width:38px; height:38px; border:1.5px solid var(--ink); transition:width .25s var(--ease),height .25s var(--ease),background .25s,border-color .25s}
+  body.cursor-on .cursor,body.cursor-on .cursor-ring{opacity:1}
+  body.cursor-hot .cursor-ring{width:58px; height:58px; background:rgba(200,242,74,.22); border-color:var(--lime-deep)}
+  @media (hover:none),(pointer:coarse){.cursor,.cursor-ring{display:none}}
+
+  /* ---------- nav ---------- */
+  header.nav{position:sticky; top:0; z-index:60; background:rgba(247,245,239,.78);
+    backdrop-filter:saturate(140%) blur(10px); border-bottom:1px solid transparent; transition:border-color .3s,background .3s}
+  header.nav.stuck{border-color:var(--line); background:rgba(247,245,239,.92)}
+  .nav-row{display:flex; align-items:center; justify-content:space-between; height:74px}
+  .brand{display:flex; align-items:center; gap:11px; font-family:"Syne"; font-weight:800; font-size:1.32rem; letter-spacing:-.01em}
+  .brand .mark{width:30px; height:30px; border-radius:9px; background:var(--ink); position:relative; flex:none}
+  .brand .mark::after{content:""; position:absolute; inset:8px; border-radius:4px; background:var(--lime)}
+  .nav-links{display:flex; gap:30px}
+  .nav-links a{font-size:.96rem; font-weight:500; color:var(--ink-soft); position:relative; padding:4px 0}
+  .nav-links a::after{content:""; position:absolute; left:0; bottom:-1px; width:100%; height:2px; background:var(--ink);
+    transform:scaleX(0); transform-origin:left; transition:transform .35s var(--ease)}
+  .nav-links a:hover::after{transform:scaleX(1)}
+  @media (max-width:940px){.nav-links{display:none}}
+
+  /* ---------- buttons ---------- */
+  .btn{display:inline-flex; align-items:center; gap:.6em; font-family:"Manrope"; font-weight:600; font-size:.98rem;
+    padding:14px 24px; border-radius:999px; border:1.5px solid transparent; cursor:pointer; will-change:transform;
+    transition:background .25s,color .25s,border-color .25s,box-shadow .25s}
+  .btn .arr{transition:transform .3s var(--ease)}
+  .btn:hover .arr{transform:translateX(4px)}
+  .btn-lime{background:var(--lime); color:var(--lime-ink); box-shadow:0 1px 0 rgba(0,0,0,.04)}
+  .btn-lime:hover{background:#d2f96a; box-shadow:0 10px 26px -12px rgba(164,212,0,.8)}
+  .btn-ghost{background:transparent; color:var(--ink); border-color:var(--line-2)}
+  .btn-ghost:hover{border-color:var(--ink); background:#fff}
+  .btn-sm{padding:11px 19px; font-size:.92rem}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative; padding-top:30px}
+  .hero-grid{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:54px; align-items:center}
+  .hero-copy{padding:26px 0 40px; max-width:600px}
+  .hl{font-family:"Syne"; font-weight:800; line-height:1.0; letter-spacing:-.04em; text-transform:uppercase;
+    font-size:clamp(2rem,5vw,4.2rem); margin:18px 0 0}
+  .hl .line{display:block; overflow:hidden; padding:.02em 0}
+  .hl .line > span{display:block; will-change:transform}
+  .hl .lime{color:var(--lime-deep)}
+  .hero-sub{margin:24px 0 0; font-size:1.12rem; color:var(--ink-soft); max-width:46ch}
+  .hero-cta{display:flex; flex-wrap:wrap; gap:14px; margin-top:30px}
+  .trust{margin-top:38px}
+  .trust .lbl{font-size:.74rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted)}
+  .trust .names{display:flex; flex-wrap:wrap; gap:10px 18px; margin-top:13px}
+  .trust .names span{font-family:"Syne"; font-weight:700; font-size:.96rem; color:var(--ink); opacity:.62}
+
+  /* ---------- vertical marquee ---------- */
+  .reel{position:relative; height:clamp(440px,76vh,720px); display:grid; grid-template-columns:repeat(3,1fr); gap:18px;
+    -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 11%,#000 89%,transparent 100%);
+            mask-image:linear-gradient(180deg,transparent 0,#000 11%,#000 89%,transparent 100%)}
+  .col{overflow:hidden}
+  .col-inner{display:flex; flex-direction:column; gap:18px; will-change:transform; animation:scrollUp linear infinite}
+  .col-1 .col-inner{animation-duration:42s}
+  .col-2 .col-inner{animation-duration:54s; animation-direction:reverse}
+  .col-3 .col-inner{animation-duration:48s}
+  .reel:hover .col-inner{animation-play-state:paused}
+  @keyframes scrollUp{from{transform:translateY(0)} to{transform:translateY(-50%)}}
+  @media (max-width:560px){.reel{grid-template-columns:repeat(2,1fr)}.col-3{display:none}}
+
+  .tile{position:relative; border-radius:var(--r-md); overflow:hidden; background:var(--panel);
+    border:1px solid var(--line); box-shadow:0 12px 30px -22px rgba(20,22,15,.5);
+    aspect-ratio:4/5; transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .3s}
+  .tile img,.tile video{width:100%; height:100%; object-fit:cover; object-position:top center; transition:transform .6s var(--ease)}
+  .tile .cap{position:absolute; left:0; right:0; bottom:0; padding:32px 14px 13px;
+    background:linear-gradient(0deg,rgba(15,16,11,.82),transparent); color:#fff;
+    transform:translateY(8px); opacity:0; transition:opacity .35s,transform .35s var(--ease)}
+  .tile .cap b{display:block; font-family:"Syne"; font-weight:700; font-size:.92rem; letter-spacing:-.01em}
+  .tile .cap small{font-family:"Spline Sans Mono",monospace; font-size:.66rem; letter-spacing:.06em; opacity:.82; text-transform:uppercase}
+  .tile:hover{transform:translateY(-6px) scale(1.025); box-shadow:0 26px 44px -24px rgba(20,22,15,.62); border-color:var(--lime-deep)}
+  .tile:hover img,.tile:hover video{transform:scale(1.06)}
+  .tile:hover .cap{opacity:1; transform:translateY(0)}
+  .tile .tag{position:absolute; top:10px; left:10px; z-index:2; font-family:"Spline Sans Mono",monospace; font-size:.6rem;
+    letter-spacing:.08em; text-transform:uppercase; background:var(--lime); color:var(--lime-ink); padding:4px 8px; border-radius:6px}
+
+  /* ---------- logo ticker ---------- */
+  .ticker{border-block:1px solid var(--line); margin-top:46px; padding:20px 0; overflow:hidden; background:var(--panel)}
+  .ticker-row{display:flex; gap:58px; width:max-content; animation:slide 34s linear infinite}
+  .ticker:hover .ticker-row{animation-play-state:paused}
+  @keyframes slide{from{transform:translateX(0)} to{transform:translateX(-50%)}}
+  .ticker-row span{font-family:"Syne"; font-weight:700; font-size:1.18rem; color:var(--ink); opacity:.4; white-space:nowrap;
+    display:inline-flex; align-items:center; gap:14px}
+  .ticker-row span::before{content:"✦"; color:var(--lime-deep); opacity:.9}
+
+  /* ---------- sections ---------- */
+  section.band{padding:96px 0}
+  .sec-head{max-width:640px}
+  .sec-head h2{font-family:"Syne"; font-weight:800; letter-spacing:-.02em; line-height:1.02;
+    font-size:clamp(2.1rem,4.4vw,3.3rem); margin:14px 0 0}
+  .sec-head p{color:var(--muted); font-size:1.08rem; margin:16px 0 0}
+
+  .svc{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:52px}
+  .card{background:var(--panel); border:1px solid var(--line); border-radius:var(--r-lg); padding:30px 28px 34px;
+    position:relative; overflow:hidden; transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .3s}
+  .card:hover{transform:translateY(-5px); box-shadow:0 28px 50px -30px rgba(20,22,15,.45); border-color:var(--line-2)}
+  .card .num{font-family:"Spline Sans Mono",monospace; font-size:.78rem; color:var(--lime-deep); font-weight:600}
+  .card h3{font-family:"Syne"; font-weight:700; font-size:1.42rem; letter-spacing:-.01em; margin:18px 0 10px}
+  .card p{color:var(--muted); font-size:1rem; margin:0}
+  .card .ic{width:46px; height:46px; border-radius:12px; background:var(--bg); border:1px solid var(--line);
+    display:grid; place-items:center; margin-top:22px; color:var(--ink)}
+  .card::after{content:""; position:absolute; left:0; right:0; bottom:0; height:3px; background:var(--lime);
+    transform:scaleX(0); transform-origin:left; transition:transform .45s var(--ease)}
+  .card:hover::after{transform:scaleX(1)}
+  @media (max-width:860px){.svc{grid-template-columns:1fr}}
+
+  .stats{display:grid; grid-template-columns:repeat(4,1fr); gap:0; border:1px solid var(--line); border-radius:var(--r-lg);
+    overflow:hidden; background:var(--panel); margin-top:8px}
+  .stat{padding:38px 26px; border-right:1px solid var(--line)}
+  .stat:last-child{border-right:none}
+  .stat .big{font-family:"Syne"; font-weight:800; font-size:clamp(2.4rem,4.6vw,3.4rem); line-height:1; letter-spacing:-.02em}
+  .stat .big i{font-style:normal; color:var(--lime-deep)}
+  .stat .lab{color:var(--muted); font-size:.95rem; margin-top:10px}
+  @media (max-width:860px){.stats{grid-template-columns:1fr 1fr}.stat:nth-child(2){border-right:none}.stat:nth-child(1),.stat:nth-child(2){border-bottom:1px solid var(--line)}}
+
+  /* ---------- CTA band ---------- */
+  .cta{background:var(--ink); color:#fff; border-radius:var(--r-lg); padding:clamp(40px,6vw,76px); position:relative; overflow:hidden}
+  .cta::before{content:""; position:absolute; right:-80px; top:-80px; width:320px; height:320px; border-radius:50%;
+    background:radial-gradient(circle,rgba(200,242,74,.34),transparent 68%)}
+  .cta h2{font-family:"Syne"; font-weight:800; font-size:clamp(2rem,4.6vw,3.4rem); line-height:1.02; letter-spacing:-.02em; margin:0; max-width:18ch}
+  .cta p{color:rgba(255,255,255,.72); font-size:1.1rem; margin:18px 0 30px; max-width:48ch}
+  .cta .row{display:flex; flex-wrap:wrap; gap:14px; align-items:center}
+  .cta .btn-ghost{color:#fff; border-color:rgba(255,255,255,.3)}
+  .cta .btn-ghost:hover{border-color:#fff; background:rgba(255,255,255,.06)}
+
+  /* ---------- footer ---------- */
+  footer{padding:54px 0 40px; border-top:1px solid var(--line); margin-top:90px}
+  .foot-row{display:flex; flex-wrap:wrap; gap:20px; justify-content:space-between; align-items:center}
+  .foot-row .mono{font-size:.82rem; color:var(--muted)}
+
+  /* reveal default state (JS/GSAP toggles) */
+  .reveal{opacity:0; transform:translateY(22px)}
+  .reveal.in{opacity:1; transform:none; transition:opacity .8s var(--ease),transform .8s var(--ease)}
+
+  @media (prefers-reduced-motion:reduce){
+    .col-inner,.ticker-row{animation:none !important}
+    .reveal{opacity:1 !important; transform:none !important}
+    html{scroll-behavior:auto}
+  }
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr; gap:36px}
+    .hero-copy{padding-top:8px}
+    .reel{height:58vh}
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <div class="wrap nav-row">
+    <a class="brand" href="#top" data-hot><span class="mark"></span>Lumen</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#work">Work</a>
+      <a href="#services">Services</a>
+      <a href="#proof">Proof</a>
+      <a href="#process">Process</a>
+    </nav>
+    <a class="btn btn-lime btn-sm magnetic" href="#audit" data-hot>Get started <span class="arr">→</span></a>
+  </div>
+</header>
+
+<!-- HERO -->
+<main id="top">
+<section class="hero">
+  <div class="wrap hero-grid">
+
+    <div class="hero-copy">
+      <span class="eyebrow reveal"><span class="dot"></span>Lumen Marketing · Greater Phoenix</span>
+      <h1 class="hl">
+        <span class="line"><span>Websites</span></span>
+        <span class="line"><span>that</span></span>
+        <span class="line"><span>book</span></span>
+        <span class="line"><span>more</span></span>
+        <span class="line"><span>jobs<span class="lime">.</span></span></span>
+      </h1>
+      <p class="hero-sub reveal">We're the web team behind Greater Phoenix's fastest-growing home-service brands — sites engineered to load in under a second and turn clicks into booked jobs.</p>
+      <div class="hero-cta reveal">
+        <a class="btn btn-lime magnetic" href="#audit" data-hot>Get a free site audit <span class="arr">→</span></a>
+        <a class="btn btn-ghost magnetic" href="#work" data-hot>See our work</a>
+      </div>
+      <div class="trust reveal">
+        <div class="lbl">Trusted by 40+ local crews</div>
+        <div class="names">
+          <span>Quest Roofing</span><span>Saguaro Cabinetry</span><span>Quest Drafting</span><span>East Valley HVAC</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- vertical auto-scrolling reel of website mockups -->
+    <div class="reel reveal" id="reel" aria-label="Recent websites built by Lumen" role="img">
+      <div class="col col-1"><div class="col-inner" data-loop>
+        <figure class="tile" data-hot><span class="tag">Live</span><img src="assets/mockups/site-porsche.png" alt="Atelier website design for a luxury remodeler" loading="eager"><figcaption class="cap"><b>Atelier</b><small>Luxury remodeler · +38% leads</small></figcaption></figure>
+        <figure class="tile" data-hot><img src="assets/stock/web-196644.jpg" alt="Front-end build in progress"><figcaption class="cap"><b>Build sprint</b><small>Design → live in 2 weeks</small></figcaption></figure>
+        <figure class="tile" data-hot><span class="tag">Live</span><img src="assets/mockups/site-stripe.png" alt="Gridwork SaaS dashboard website"><figcaption class="cap"><b>Gridwork</b><small>Software for trades</small></figcaption></figure>
+        <figure class="tile" data-hot><img src="assets/stock/web-5474295.jpg" alt="Designer working on a laptop"><figcaption class="cap"><b>In the studio</b><small>Pixel QA on every page</small></figcaption></figure>
+      </div></div>
+
+      <div class="col col-2"><div class="col-inner" data-loop>
+        <figure class="tile" data-hot><span class="tag">Live</span><img src="assets/mockups/site-shopify.png" alt="Storefront e-commerce website"><figcaption class="cap"><b>Storefront</b><small>E-commerce · 0.7s load</small></figcaption></figure>
+        <figure class="tile" data-hot><img src="assets/stock/web-196645.jpg" alt="Web designer at a dual-monitor desk"><figcaption class="cap"><b>Design review</b><small>Twice a week, with you</small></figcaption></figure>
+        <figure class="tile" data-hot><span class="tag">Live</span><img src="assets/mockups/site-monarch.png" alt="Almanac design studio website"><figcaption class="cap"><b>Almanac</b><small>Studio rebrand</small></figcaption></figure>
+        <figure class="tile" data-hot><img src="assets/stock/web-374074.jpg" alt="Wireframe sketches for a website"><figcaption class="cap"><b>Wireframe → live</b><small>Mapped before we build</small></figcaption></figure>
+      </div></div>
+
+      <div class="col col-3"><div class="col-inner" data-loop>
+        <figure class="tile" data-hot><span class="tag">Live</span>
+          <video muted autoplay loop playsinline preload="auto" poster="assets/web-build-poster.jpg" aria-label="Time-lapse of a website being built"><source src="assets/web-build.mp4" type="video/mp4"></video>
+          <figcaption class="cap"><b>Web build</b><small>PageSpeed 98 / 100</small></figcaption></figure>
+        <figure class="tile" data-hot><span class="tag">Live</span><img src="assets/mockups/site-apple.png" alt="Monolith product launch website"><figcaption class="cap"><b>Monolith</b><small>Product launch</small></figcaption></figure>
+        <figure class="tile" data-hot><img src="assets/stock/web-4974915.jpg" alt="Code on a screen"><figcaption class="cap"><b>Code that ranks</b><small>Clean, fast, indexable</small></figcaption></figure>
+        <figure class="tile" data-hot><span class="tag">Live</span><img src="assets/mockups/site-ramp.png" alt="Ledger contractor dashboard website"><figcaption class="cap"><b>Ledger</b><small>Contractor dashboard</small></figcaption></figure>
+      </div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- LOGO TICKER -->
+<div class="ticker" id="work" aria-hidden="true">
+  <div class="ticker-row">
+    <span>Quest Roofing</span><span>Saguaro Cabinetry</span><span>Quest Drafting &amp; Design</span><span>East Valley HVAC</span><span>Gilbert Concrete Co.</span><span>Desert Edge Landscapes</span>
+    <span>Quest Roofing</span><span>Saguaro Cabinetry</span><span>Quest Drafting &amp; Design</span><span>East Valley HVAC</span><span>Gilbert Concrete Co.</span><span>Desert Edge Landscapes</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="band" id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow"><span class="dot"></span>What we do</span>
+      <h2>Three things, done properly.</h2>
+      <p>No bloated retainers, no template farms. A small senior team that designs, builds and ranks the site your crew actually needs.</p>
+    </div>
+    <div class="svc">
+      <article class="card reveal" data-hot>
+        <span class="num">01</span>
+        <h3>Websites that rank</h3>
+        <p>Hand-built, lightning-fast sites with local SEO baked in — so you show up first when someone in your service area searches.</p>
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+      </article>
+      <article class="card reveal" data-hot>
+        <span class="num">02</span>
+        <h3>Software that scales</h3>
+        <p>Booking flows, quote tools, customer portals — custom software that turns your busiest workflows into a competitive edge.</p>
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 9l-4 3 4 3"/><path d="M16 9l4 3-4 3"/><path d="M13 6l-2 12"/></svg></div>
+      </article>
+      <article class="card reveal" data-hot>
+        <span class="num">03</span>
+        <h3>Brand that sticks</h3>
+        <p>A look and voice homeowners trust on sight — consistent across your site, trucks, proposals and every Google listing.</p>
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.5 5.3 5.8.8-4.2 4 1 5.7L12 22l-5.1-2.4 1-5.7-4.2-4 5.8-.8z"/></svg></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="band" id="proof" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal" style="margin-bottom:34px">
+      <span class="eyebrow"><span class="dot"></span>The proof</span>
+      <h2>Built to move the numbers that pay you.</h2>
+    </div>
+    <div class="stats">
+      <div class="stat reveal"><div class="big"><i>&lt;</i><span data-count="1">0</span><i>s</i></div><div class="lab">Median load on mobile</div></div>
+      <div class="stat reveal"><div class="big"><span data-count="40">0</span><i>+</i></div><div class="lab">Sites shipped for local crews</div></div>
+      <div class="stat reveal"><div class="big">Top-<span data-count="3">0</span></div><div class="lab">Average local map rank</div></div>
+      <div class="stat reveal"><div class="big"><span data-count="0">0</span></div><div class="lab">Long-term contracts. Ever.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="band" id="audit" style="padding-top:0">
+  <div class="wrap">
+    <div class="cta reveal">
+      <h2>Ready to be the brightest result in your market?</h2>
+      <p>Send us your current site (or your competitor's). We'll send back a free 5-point audit — page speed, mobile, local SEO, conversion and design — within two business days.</p>
+      <div class="row">
+        <a class="btn btn-lime magnetic" href="mailto:hello@joinlumenmarketing.com?subject=Free%20site%20audit" data-hot>Get my free audit <span class="arr">→</span></a>
+        <a class="btn btn-ghost magnetic" href="tel:+14805550199" data-hot>Or call (480) 555-0199</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer id="process">
+  <div class="wrap foot-row">
+    <a class="brand" href="#top" data-hot><span class="mark"></span>Lumen</a>
+    <span class="mono">Websites · Software · Brand — Greater Phoenix, AZ</span>
+    <span class="mono">© 2026 Lumen Marketing</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var finePointer = window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+
+  /* ---- duplicate reel columns for a seamless loop (CSS animation runs regardless) ---- */
+  document.querySelectorAll('[data-loop]').forEach(function(inner){
+    inner.innerHTML += inner.innerHTML;   // 2x content → translateY(-50%) loops seamlessly
+  });
+
+  /* ---- sticky nav border ---- */
+  var nav = document.getElementById('nav');
+  var onScroll = function(){ nav.classList.toggle('stuck', window.scrollY > 8); };
+  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+
+  /* ---- custom cursor (fine pointers only) ---- */
+  if(finePointer){
+    var dot = document.querySelector('.cursor'), ring = document.querySelector('.cursor-ring');
+    var rx=0, ry=0, mx=0, my=0, started=false;
+    window.addEventListener('mousemove', function(e){
+      mx=e.clientX; my=e.clientY;
+      dot.style.transform='translate('+mx+'px,'+my+'px) translate(-50%,-50%)';
+      if(!started){ started=true; document.body.classList.add('cursor-on'); rx=mx; ry=my; }
+    });
+    (function raf(){
+      rx+=(mx-rx)*.18; ry+=(my-ry)*.18;
+      ring.style.transform='translate('+rx+'px,'+ry+'px) translate(-50%,-50%)';
+      requestAnimationFrame(raf);
+    })();
+    document.querySelectorAll('[data-hot]').forEach(function(el){
+      el.addEventListener('mouseenter', function(){ document.body.classList.add('cursor-hot'); });
+      el.addEventListener('mouseleave', function(){ document.body.classList.remove('cursor-hot'); });
+    });
+  }
+
+  /* ---- magnetic buttons ---- */
+  if(finePointer && !reduce){
+    document.querySelectorAll('.magnetic').forEach(function(btn){
+      var strength = 16;
+      btn.addEventListener('mousemove', function(e){
+        var r = btn.getBoundingClientRect();
+        var x = (e.clientX - r.left - r.width/2)/(r.width/2);
+        var y = (e.clientY - r.top - r.height/2)/(r.height/2);
+        btn.style.transform = 'translate('+(x*strength)+'px,'+(y*strength*.7)+'px)';
+      });
+      btn.addEventListener('mouseleave', function(){ btn.style.transform=''; });
+    });
+  }
+
+  /* ---- count-ups ---- */
+  function runCount(el){
+    var target = parseFloat(el.getAttribute('data-count')); if(isNaN(target)) return;
+    if(reduce){ el.textContent = target; return; }
+    var dur = 1100, t0 = null;
+    function step(ts){ if(!t0) t0=ts; var p=Math.min((ts-t0)/dur,1);
+      el.textContent = Math.round(target*(1 - Math.pow(1-p,3)));
+      if(p<1) requestAnimationFrame(step); else el.textContent = target; }
+    requestAnimationFrame(step);
+  }
+
+  /* ---- GSAP enhancement (optional) ---- */
+  var motionDone = false;
+  function initMotion(){
+    if(motionDone) return; motionDone = true;
+    var gsap = window.gsap;
+    if(!gsap || reduce){ // fallback: just show everything + count
+      document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+      document.querySelectorAll('[data-count]').forEach(runCount);
+      return;
+    }
+    if(window.ScrollTrigger) gsap.registerPlugin(window.ScrollTrigger);
+
+    // hero entrance timeline
+    var tl = gsap.timeline({defaults:{ease:'power3.out'}});
+    gsap.set('.hl .line > span', {yPercent:115});
+    gsap.set(['.hero-copy .reveal','.reel'], {opacity:0, y:24});
+    tl.to('.hl .line > span', {yPercent:0, duration:1, stagger:.12}, 0)
+      .to('.hero-copy .eyebrow', {opacity:1, y:0, duration:.6}, .15)
+      .to('.hero-sub', {opacity:1, y:0, duration:.6}, .35)
+      .to('.hero-cta', {opacity:1, y:0, duration:.6}, .48)
+      .to('.trust', {opacity:1, y:0, duration:.6}, .58)
+      .to('.reel', {opacity:1, y:0, duration:.9}, .3);
+    // make sure the visible reveals inside hero get the class too
+    document.querySelectorAll('.hero .reveal').forEach(function(el){ el.classList.add('in'); el.style.opacity=''; el.style.transform=''; });
+
+    // scroll reveals for the rest
+    if(window.ScrollTrigger){
+      document.querySelectorAll('.reveal').forEach(function(el){
+        if(el.closest('.hero')) return;
+        gsap.set(el, {opacity:0, y:26});
+        gsap.to(el, {opacity:1, y:0, duration:.8, ease:'power2.out',
+          scrollTrigger:{trigger:el, start:'top 86%'}});
+      });
+      document.querySelectorAll('[data-count]').forEach(function(el){
+        window.ScrollTrigger.create({trigger:el, start:'top 85%', once:true, onEnter:function(){ runCount(el); }});
+      });
+    } else {
+      document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+      document.querySelectorAll('[data-count]').forEach(runCount);
+    }
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', initMotion);
+  } else { initMotion(); }
+  // safety net: never leave content hidden
+  setTimeout(function(){ if(!motionDone){ document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+    document.querySelectorAll('[data-count]').forEach(runCount); motionDone = true; } }, 1500);
+})();
+</script>
+</body>
+</html>
