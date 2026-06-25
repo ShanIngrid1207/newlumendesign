@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lumen Marketing — Design Directions</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Six clean design directions for the Lumen Marketing landing page — each a full, live build with real imagery and a video hero. Toggle desktop/mobile, interact with each preview, or open full screen.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=EB+Garamond:ital@1&family=Hanken+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F5F1E9;--card:#FCFAF4;--ink:#1C1812;--ink-2:#4A4438;--mute:#8B8270;
+  --line:#E0D8C6;--line-2:#CBC1AA;--terra:#B96A2E;--terra-deep:#9A551F;
+  --serif:'Marcellus',serif;--ital:'EB Garamond',serif;--sans:'Hanken Grotesk',sans-serif;--mono:'JetBrains Mono',monospace;
+  --eo:cubic-bezier(.23,1,.32,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+::selection{background:var(--terra);color:#fff}
+:focus-visible{outline:2px solid var(--terra-deep);outline-offset:3px;border-radius:2px}
+.wrap{max-width:1480px;margin:0 auto;padding:0 clamp(20px,3vw,44px)}
+
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.1;text-wrap:balance}
+em{font-family:var(--ital);font-style:italic;color:var(--terra-deep)}
+.mlabel{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+
+.bar{position:sticky;top:0;z-index:40;background:rgba(245,241,233,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.bar .in{display:flex;align-items:center;justify-content:space-between;gap:16px;height:70px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:11px}
+.brand .mark{width:36px;height:36px;border-radius:8px;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-family:var(--serif);font-size:18px;position:relative;overflow:hidden}
+.brand .mark::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 25%,rgba(233,163,60,.9),transparent 60%);mix-blend-mode:screen;opacity:.55}
+.brand .t b{font-family:var(--serif);font-weight:400;font-size:17px;display:block;line-height:1.15}
+.brand .t span{font-family:var(--mono);font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+.bar-right{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.seg{display:inline-flex;background:#ECE6D9;border:1px solid var(--line);border-radius:99px;padding:3px}
+.seg button{font-family:var(--mono);font-size:11px;letter-spacing:.08em;font-weight:500;padding:.55em 1.2em;border-radius:99px;color:var(--mute);border:0;background:none;cursor:pointer;transition:.25s var(--eo);text-transform:uppercase}
+.seg button.on{background:var(--ink);color:#fff}
+.bench{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);border:1px solid var(--line-2);border-radius:99px;padding:9px 16px;transition:.25s}
+.bench:hover{border-color:var(--ink);color:var(--ink)}
+
+.hero{padding:clamp(44px,6vw,80px) 0 clamp(30px,4vw,52px);text-align:center}
+.hero h1{font-size:clamp(32px,4.6vw,62px);max-width:18ch;margin:14px auto 16px}
+.hero p{color:var(--ink-2);max-width:66ch;margin:0 auto;font-size:16.5px}
+.hero .mlabel{color:var(--terra-deep)}
+.hero .note{margin:22px auto 0;max-width:66ch;font-family:var(--mono);font-size:11px;letter-spacing:.04em;text-transform:none;color:var(--mute);background:#EFE8D9;border:1px solid var(--line);border-radius:10px;padding:11px 16px;line-height:1.7}
+.hero .note b{color:var(--ink-2);font-weight:500}
+
+.group{grid-column:1/-1;display:flex;align-items:center;gap:18px;margin:clamp(22px,3vw,40px) 0 2px}
+.group:first-child{margin-top:0}
+.group .gl{font-family:var(--serif);font-size:clamp(20px,2vw,26px);white-space:nowrap}
+.group .gn{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--terra-deep)}
+.group .rule{flex:1;height:1px;background:var(--line-2)}
+
+.deck{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(22px,2.6vw,38px);padding-bottom:clamp(60px,8vw,100px)}
+@media(max-width:1020px){.deck{grid-template-columns:1fr}}
+.dcard{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 14px 40px rgba(28,24,18,.07);display:flex;flex-direction:column;transition:transform .4s var(--eo),box-shadow .4s var(--eo),border-color .4s var(--eo)}
+.dcard:hover{transform:translateY(-4px);box-shadow:0 26px 60px rgba(28,24,18,.13);border-color:var(--line-2)}
+.dhead{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:20px 24px 16px}
+.dhead .lt{display:flex;align-items:baseline;gap:14px}
+.dhead .letter{font-family:var(--serif);font-size:15px;color:var(--terra-deep);border:1px solid var(--line-2);border-radius:50%;width:34px;height:34px;display:grid;place-items:center;align-self:center;transition:.3s var(--eo);flex:0 0 auto}
+.dcard:hover .letter{background:var(--terra-deep);color:#fff;border-color:var(--terra-deep)}
+.dhead h2{font-size:clamp(22px,2vw,28px)}
+.dhead .tagline{font-family:var(--ital);font-style:italic;font-size:15px;color:var(--mute)}
+.open{display:inline-flex;align-items:center;gap:.5em;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;color:#fff;background:var(--ink);border-radius:99px;padding:10px 18px;transition:.25s var(--eo);flex:0 0 auto}
+.open:hover{background:var(--terra-deep);transform:translateY(-2px)}
+.open svg{width:.95em;height:.95em;transition:transform .25s var(--eo)}
+.open:hover svg{transform:translate(2px,-2px)}
+
+.preview{position:relative;background:#E8E2D4;border-block:1px solid var(--line);overflow:hidden}
+.preview iframe{position:absolute;top:0;left:0;border:0;transform-origin:top left;background:#fff;pointer-events:auto}
+.preview .veil{position:absolute;inset:0;z-index:2;display:grid;place-items:center;background:rgba(28,24,18,0);transition:background .3s;cursor:pointer}
+.preview .veil span{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#fff;background:rgba(28,24,18,.78);border-radius:99px;padding:9px 18px;opacity:0;transform:translateY(6px);transition:opacity .3s,transform .3s var(--eo)}
+.preview .veil:hover span{opacity:1;transform:translateY(0)}
+.preview.live .veil{display:none}
+
+.dbody{padding:18px 24px 24px;display:flex;flex-direction:column;gap:14px;flex:1}
+.dbody p{font-size:14.5px;color:var(--ink-2);max-width:74ch}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:auto}
+.chips span{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--terra-deep);background:#F4E5D5;border-radius:99px;padding:6px 12px}
+
+footer{border-top:1px solid var(--line);padding:34px 0 40px;text-align:center}
+footer p{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);line-height:2.2}
+
+@media(prefers-reduced-motion:no-preference){
+  .dcard{opacity:0;transform:translateY(26px)}
+  .dcard.in{opacity:1;transform:translateY(0);transition:opacity .7s var(--eo),box-shadow .4s var(--eo),border-color .4s var(--eo);transition-delay:var(--d,0s)}
+  .dcard.in:hover{transform:translateY(-4px)}
+}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="wrap in">
+    <div class="brand">
+      <span class="mark" aria-hidden="true">L</span>
+      <span class="t"><b>Lumen Marketing</b><span>Design Directions</span></span>
+    </div>
+    <div class="bar-right">
+      <div class="seg" role="group" aria-label="Preview device">
+        <button id="segDesk" class="on">Desktop</button>
+        <button id="segMob">Mobile</button>
+      </div>
+      <a class="bench" href="mailto:hello@joinlumenmarketing.com">hello@joinlumenmarketing.com</a>
+    </div>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="mlabel">Lumen Marketing · Design directions · June 2026</span>
+    <h1>Six ways to be the <em>brightest result</em></h1>
+    <p>One landing page, six clean directions — each a full, live build with real photography and a muted video hero. Toggle Desktop / Mobile up top, hover a preview to interact, or open any direction full screen.</p>
+    <p class="note">Each direction pulls real <b>stock photos + a hero video</b> over the web, so previews need an internet connection to show media — they behave the same hosted on <b>GitHub Pages</b>. Hover a card and click <b>“Click to interact”</b> to scroll and play inside a preview.</p>
+  </div>
+</header>
+
+<main class="wrap deck" id="deck">
+
+  <div class="group"><span class="gl">Six directions</span><span class="rule"></span><span class="gn">White / cream · one accent each · live</span></div>
+
+  <!-- 1 · Atelier (Porsche DNA) -->
+  <article class="dcard" data-src="porsche.html">
+    <div class="dhead">
+      <div class="lt"><span class="letter">1</span><div><h2>Atelier</h2><span class="tagline">luxury editorial · cream + red</span></div></div>
+      <a class="open" href="porsche.html" target="_blank" rel="noopener">Open <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+    </div>
+    <div class="preview"><div class="veil" role="button" tabindex="0" aria-label="Activate Atelier preview"><span>Click to interact</span></div></div>
+    <div class="dbody">
+      <p>Magazine-grade restraint: weight-400 Fraunces headlines on warm cream, a single confident red, and an asymmetric editorial bento. Borders over shadows, a muted video hero, and a sticky-pinned process column with animated counters.</p>
+      <div class="chips"><span>Fraunces · Archivo</span><span>Cream + red</span><span>Editorial bento</span><span>Video hero</span></div>
+    </div>
+  </article>
+
+  <!-- 2 · Ledger (Ramp DNA) -->
+  <article class="dcard" data-src="ramp.html">
+    <div class="dhead">
+      <div class="lt"><span class="letter">2</span><div><h2>Ledger</h2><span class="tagline">sharp modern · cream + amber</span></div></div>
+      <a class="open" href="ramp.html" target="_blank" rel="noopener">Open <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+    </div>
+    <div class="preview"><div class="veil" role="button" tabindex="0" aria-label="Activate Ledger preview"><span>Click to interact</span></div></div>
+    <div class="dbody">
+      <p>Fintech precision on warm cream: Space Grotesk, a tight 4-column ledger rhythm, surface-layering instead of shadows, and a single amber action color. A swipe-highlight headline, count-up stats, and a clean bento work grid.</p>
+      <div class="chips"><span>Space Grotesk</span><span>Cream + amber</span><span>Bento + counters</span><span>Video hero</span></div>
+    </div>
+  </article>
+
+  <!-- 3 · Storefront (Shopify DNA) -->
+  <article class="dcard" data-src="shopify.html">
+    <div class="dhead">
+      <div class="lt"><span class="letter">3</span><div><h2>Storefront</h2><span class="tagline">friendly premium · cream + green</span></div></div>
+      <a class="open" href="shopify.html" target="_blank" rel="noopener">Open <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+    </div>
+    <div class="preview"><div class="veil" role="button" tabindex="0" aria-label="Activate Storefront preview"><span>Click to interact</span></div></div>
+    <div class="dbody">
+      <p>Commerce-grade polish: low-weight Bricolage headlines, hairline borders before shadows, deep-green panels on cream, and a single bright-green signal color reserved for the CTA. Double-bezel video hero with a floating proof-metric card.</p>
+      <div class="chips"><span>Bricolage · Hanken</span><span>Cream + green</span><span>Product panels</span><span>Video hero</span></div>
+    </div>
+  </article>
+
+  <!-- 4 · Monolith (Apple DNA) -->
+  <article class="dcard" data-src="apple.html">
+    <div class="dhead">
+      <div class="lt"><span class="letter">4</span><div><h2>Monolith</h2><span class="tagline">radical minimal · white + cobalt</span></div></div>
+      <a class="open" href="apple.html" target="_blank" rel="noopener">Open <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+    </div>
+    <div class="preview"><div class="veil" role="button" tabindex="0" aria-label="Activate Monolith preview"><span>Click to interact</span></div></div>
+    <div class="dbody">
+      <p>Maximum whitespace, minimum noise: alternating edge-to-edge media bands (white ↔ parchment), one near-black band for Process, and a single cobalt accent. Cinematic video hero and big ken-burns work imagery — color change is the only divider.</p>
+      <div class="chips"><span>Space Grotesk</span><span>White + cobalt</span><span>Big media bands</span><span>Video hero</span></div>
+    </div>
+  </article>
+
+  <!-- 5 · Gridwork (Stripe DNA) -->
+  <article class="dcard" data-src="stripe.html">
+    <div class="dhead">
+      <div class="lt"><span class="letter">5</span><div><h2>Gridwork</h2><span class="tagline">precise systematic · light + teal</span></div></div>
+      <a class="open" href="stripe.html" target="_blank" rel="noopener">Open <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+    </div>
+    <div class="preview"><div class="veil" role="button" tabindex="0" aria-label="Activate Gridwork preview"><span>Click to interact</span></div></div>
+    <div class="dbody">
+      <p>Developer-grade structure: navy ink on a pale canvas, fine dashed dividers, an angled product-UI hero card and a floating live "site audit" panel with a filling score bar. Stripe's system — with the violet swapped for teal.</p>
+      <div class="chips"><span>Schibsted Grotesk</span><span>Light + teal</span><span>Product-UI mockups</span><span>Audit panel</span></div>
+    </div>
+  </article>
+
+  <!-- 6 · Almanac (Monarch DNA) -->
+  <article class="dcard" data-src="monarch.html">
+    <div class="dhead">
+      <div class="lt"><span class="letter">6</span><div><h2>Almanac</h2><span class="tagline">calm refined · cream + terracotta</span></div></div>
+      <a class="open" href="monarch.html" target="_blank" rel="noopener">Open <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+    </div>
+    <div class="preview"><div class="veil" role="button" tabindex="0" aria-label="Activate Almanac preview"><span>Click to interact</span></div></div>
+    <div class="dbody">
+      <p>Warm, trustworthy, editorial: linen cream with warm-white paper cards, Fraunces with italic accents, hairline borders and whisper-soft shadows, and a single terracotta accent. Framed video hero with floating stat cards and an inline pull-quote.</p>
+      <div class="chips"><span>Fraunces · Hanken</span><span>Cream + terracotta</span><span>Editorial gallery</span><span>Video hero</span></div>
+    </div>
+  </article>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Lumen Marketing · Design directions showcase · 2026 · Gilbert, AZ · Get found. Get booked.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var DESK={w:1440,h:900},MOB={w:390,h:780};
+  var mode='desk';
+  var cards=Array.prototype.slice.call(document.querySelectorAll('.dcard'));
+
+  function layout(){
+    cards.forEach(function(card){
+      var pv=card.querySelector('.preview');
+      var f=pv.querySelector('iframe');
+      var cw=pv.clientWidth;
+      var s,w,h;
+      if(mode==='desk'){
+        w=DESK.w;h=DESK.h;s=cw/w;
+        pv.style.height=(h*s)+'px';
+        if(f){f.style.width=w+'px';f.style.height=h+'px';f.style.transform='scale('+s+')';f.style.left='0px';}
+      }else{
+        w=MOB.w;h=MOB.h;
+        var ph=Math.min(560,cw*0.9);
+        s=ph/h;
+        pv.style.height=ph+'px';
+        if(f){f.style.width=w+'px';f.style.height=h+'px';f.style.transform='scale('+s+')';f.style.left=((cw-w*s)/2)+'px';}
+      }
+    });
+  }
+
+  function spawn(card){
+    var pv=card.querySelector('.preview');
+    if(pv.querySelector('iframe'))return;
+    var f=document.createElement('iframe');
+    var src=card.getAttribute('data-src');
+    f.src=src+(src.indexOf('?')<0?'?preview':'&preview');
+    f.title='Live preview';
+    f.loading='lazy';
+    pv.appendChild(f);
+    layout();
+  }
+
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){if(e.isIntersecting){spawn(e.target);io.unobserve(e.target);}});
+    },{rootMargin:'300px 0px'});
+    cards.forEach(function(c){io.observe(c);});
+  }else{cards.forEach(spawn);}
+
+  cards.forEach(function(card){
+    var pv=card.querySelector('.preview'),veil=pv.querySelector('.veil');
+    function activate(){spawn(card);pv.classList.add('live');}
+    veil.addEventListener('click',activate);
+    veil.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();activate();}});
+    card.addEventListener('mouseleave',function(){pv.classList.remove('live');});
+  });
+
+  var bd=document.getElementById('segDesk'),bm=document.getElementById('segMob');
+  function setMode(m){
+    mode=m;
+    bd.classList.toggle('on',m==='desk');
+    bm.classList.toggle('on',m==='mob');
+    layout();
+  }
+  bd.addEventListener('click',function(){setMode('desk');});
+  bm.addEventListener('click',function(){setMode('mob');});
+
+  window.addEventListener('resize',layout);
+  layout();
+
+  if(window.matchMedia && !window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+    var rio=new IntersectionObserver(function(es){
+      es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');rio.unobserve(e.target);}});
+    },{rootMargin:'0px 0px -8% 0px'});
+    cards.forEach(function(c,i){c.style.setProperty('--d',((i%2)*0.08)+'s');rio.observe(c);});
+  }else{cards.forEach(function(c){c.classList.add('in');});}
+})();
+</script>
+</body>
+</html>

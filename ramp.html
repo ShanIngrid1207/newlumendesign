@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lumen Marketing — Websites & Software for Contractors | Gilbert, AZ</title>
+<meta name="description" content="Lumen builds fast, mobile, search-ready websites for home-service, construction & local businesses in Greater Phoenix. Engineered to rank on Google and turn clicks into booked jobs. Get found. Get booked." />
+<meta name="theme-color" content="#f4f1ea" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23151310'/%3E%3Cpath d='M9 8 v16 h11' fill='none' stroke='%23f1c40a' stroke-width='3.4' stroke-linecap='square'/%3E%3C/svg%3E" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Lumen Marketing — Get found. Get booked." />
+<meta property="og:description" content="Fast, mobile, search-ready websites & software for home-service, construction and local contractors in Greater Phoenix & the East Valley." />
+<meta property="og:image" content="https://loremflickr.com/1200/630/construction,contractor?lock=12" />
+<meta property="og:locale" content="en_US" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Lumen Marketing",
+  "description": "Web design and software agency for home-service, construction and local contractors in Greater Phoenix.",
+  "email": "hello@joinlumenmarketing.com",
+  "slogan": "Get found. Get booked.",
+  "areaServed": ["Gilbert AZ", "Greater Phoenix", "East Valley", "Queen Creek AZ"],
+  "address": { "@type": "PostalAddress", "addressLocality": "Gilbert", "addressRegion": "AZ", "addressCountry": "US" },
+  "knowsAbout": ["Web design", "Local SEO", "Contractor software", "Lead generation"]
+}
+</script>
+
+<style>
+/* ============================================================ TOKENS */
+:root{
+  /* LEDGER palette — warm cream base, near-black ink, ONE amber accent */
+  --paper:#f4f1ea;        /* warm off-white / cream canvas */
+  --paper-deep:#efe9dd;   /* slightly deeper cream for bands */
+  --limestone:#ebe5d8;    /* card surface — separation via fill, not shadow */
+  --limestone-2:#e3dccb;  /* deeper card fill */
+  --ink:#171510;          /* near-black, warm */
+  --ink-soft:#3a352b;     /* secondary ink */
+  --fog:#7c7567;          /* muted/help text */
+  --bone:#d8d0bf;         /* hairline borders on light */
+  --bone-2:#cabfa8;
+  --amber:#f1c40a;        /* THE accent — warm amber/citron */
+  --amber-deep:#caa400;   /* amber for text-on-cream (contrast) */
+  --char:#221f18;         /* dark elevated surface (footer / dark bento) */
+  --char-2:#2b2820;
+
+  --r-ctrl:4px;   /* functional controls */
+  --r-card:12px;  /* surfaces */
+  --r-pill:9999px;
+
+  --maxw:1200px;
+  --gut:clamp(20px,5vw,52px);
+
+  --f-disp:'Space Grotesk',system-ui,sans-serif;
+  --f-body:'Inter Tight',system-ui,sans-serif;
+  --f-mono:'Space Mono',ui-monospace,monospace;
+
+  --ease-out:cubic-bezier(0.23,1,0.32,1);
+  --ease-io:cubic-bezier(0.77,0,0.175,1);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--f-body);
+  background:var(--paper);
+  color:var(--ink);
+  font-size:16px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
+
+::selection{background:var(--amber);color:var(--ink)}
+
+:focus-visible{outline:2.5px solid var(--ink);outline-offset:3px;border-radius:2px}
+
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gut)}
+
+/* mono eyebrow / label */
+.kicker{
+  font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--fog);
+  display:inline-flex;align-items:center;gap:9px;
+}
+.kicker::before{content:"";width:18px;height:1.5px;background:var(--amber-deep);display:inline-block}
+
+h1,h2,h3{font-family:var(--f-disp);font-weight:600;letter-spacing:-.02em;line-height:1.02;color:var(--ink)}
+
+/* ============================================================ BUTTONS */
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--f-disp);font-weight:500;font-size:15px;
+  padding:13px 22px;border-radius:var(--r-ctrl);
+  transition:transform .16s var(--ease-out),background .2s ease,color .2s ease,box-shadow .2s ease;
+  white-space:nowrap;
+}
+.btn:active{transform:scale(.97)}
+.btn-amber{background:var(--amber);color:var(--ink);box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
+.btn-amber:hover{background:#ffd417}
+.btn-ink{background:var(--ink);color:var(--paper)}
+.btn-ink:hover{background:#000}
+.btn-ghost{background:transparent;box-shadow:inset 0 0 0 1.5px var(--bone);color:var(--ink)}
+.btn-ghost:hover{box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn .arw{transition:transform .2s var(--ease-out)}
+.btn:hover .arw{transform:translateX(4px)}
+
+/* ============================================================ NAV */
+header{position:sticky;top:0;z-index:60;transition:background .3s ease,box-shadow .3s ease}
+header.scrolled{background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:saturate(140%) blur(10px);box-shadow:0 1px 0 var(--bone)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:72px;gap:24px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--f-disp);font-weight:700;font-size:20px;letter-spacing:-.03em}
+.brand .mark{width:30px;height:30px;border-radius:7px;background:var(--ink);display:grid;place-items:center;flex:0 0 auto}
+.brand .mark svg{width:17px;height:17px}
+.nav-links{display:flex;gap:4px;align-items:center}
+.nav-links a{
+  font-family:var(--f-disp);font-weight:500;font-size:14.5px;color:var(--ink-soft);
+  padding:8px 12px;border-radius:var(--r-ctrl);position:relative;transition:color .18s ease,background .18s ease;
+}
+.nav-links a:hover{color:var(--ink);background:var(--limestone)}
+.nav-right{display:flex;align-items:center;gap:12px}
+.nav-toggle{display:none;width:42px;height:42px;border-radius:var(--r-ctrl);box-shadow:inset 0 0 0 1.5px var(--bone);align-items:center;justify-content:center}
+.nav-toggle svg{width:20px;height:20px}
+
+/* ============================================================ HERO */
+.hero{position:relative;padding-top:clamp(36px,6vw,68px);padding-bottom:clamp(40px,6vw,72px)}
+.hero-grid{display:grid;grid-template-columns:1.06fr .94fr;gap:clamp(28px,4vw,56px);align-items:end}
+.hero-copy{max-width:620px}
+.hero h1{
+  font-size:clamp(44px,7.4vw,84px);font-weight:600;line-height:.96;
+  margin:22px 0 0;letter-spacing:-.035em;
+}
+.hero h1 .glow{
+  position:relative;white-space:nowrap;
+}
+.hero h1 .glow::after{
+  content:"";position:absolute;left:-2%;right:-2%;bottom:.1em;height:.42em;
+  background:var(--amber);z-index:-1;border-radius:2px;
+  transform:scaleX(0);transform-origin:left;
+  animation:swipe 1s var(--ease-out) .45s forwards;
+}
+@keyframes swipe{to{transform:scaleX(1)}}
+.hero p.sub{font-size:clamp(16px,1.7vw,18.5px);color:var(--ink-soft);margin-top:24px;max-width:540px;line-height:1.55}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.trust{margin-top:30px;padding-top:22px;border-top:1px solid var(--bone)}
+.trust p{font-family:var(--f-mono);font-size:12.5px;color:var(--fog);letter-spacing:.02em;line-height:1.6}
+.builds{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.build-chip{
+  font-family:var(--f-disp);font-weight:500;font-size:12.5px;color:var(--ink-soft);
+  padding:5px 11px;border-radius:var(--r-pill);background:var(--limestone);
+  box-shadow:inset 0 0 0 1px var(--bone);display:inline-flex;align-items:center;gap:7px;
+}
+.build-chip::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--amber-deep)}
+
+/* hero media */
+.hero-media{position:relative;border-radius:var(--r-card);overflow:hidden;background:var(--limestone-2);aspect-ratio:4/5;box-shadow:inset 0 0 0 1px var(--bone)}
+.hero-media video,.hero-media .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-media .poster{transition:opacity .6s ease}
+.hero-media.playing .poster{opacity:0}
+.hero-media .scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,18,12,.06) 0%,rgba(20,18,12,.34) 78%,rgba(20,18,12,.5) 100%)}
+.media-tag{
+  position:absolute;left:14px;bottom:14px;right:14px;display:flex;justify-content:space-between;align-items:flex-end;gap:12px;
+}
+.media-tag .pill{
+  font-family:var(--f-mono);font-size:11.5px;letter-spacing:.05em;color:#fff;
+  background:rgba(20,18,12,.55);backdrop-filter:blur(4px);
+  padding:6px 12px;border-radius:var(--r-pill);
+}
+.media-tag .live{display:inline-flex;align-items:center;gap:7px}
+.media-tag .live .dot{width:7px;height:7px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 0 rgba(241,196,10,.6);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(241,196,10,.55)}70%{box-shadow:0 0 0 8px rgba(241,196,10,0)}100%{box-shadow:0 0 0 0 rgba(241,196,10,0)}}
+
+/* ============================================================ STATS */
+.stats{background:var(--ink);color:var(--paper);border-radius:var(--r-card);overflow:hidden}
+.stats-inner{display:grid;grid-template-columns:repeat(4,1fr)}
+.stat{padding:clamp(26px,3vw,40px) clamp(20px,2.4vw,32px);position:relative}
+.stat+.stat{box-shadow:inset 1px 0 0 rgba(255,255,255,.09)}
+.stat .num{font-family:var(--f-disp);font-weight:600;font-size:clamp(34px,4.6vw,52px);letter-spacing:-.03em;line-height:1;color:var(--paper)}
+.stat .num .u{color:var(--amber)}
+.stat .lab{font-family:var(--f-mono);font-size:12px;color:#b6ad9b;margin-top:12px;letter-spacing:.02em;line-height:1.5}
+.section-pad{padding-block:clamp(56px,8vw,108px)}
+
+/* section heading block */
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:clamp(32px,4vw,52px)}
+.sec-head h2{font-size:clamp(30px,4.4vw,50px);font-weight:600;max-width:14ch;letter-spacing:-.03em;line-height:1.0}
+.sec-head .lede{color:var(--fog);max-width:42ch;font-size:16.5px}
+
+/* ============================================================ SERVICES */
+.services{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.svc{
+  background:var(--limestone);border-radius:var(--r-card);padding:clamp(26px,3vw,40px);
+  box-shadow:inset 0 0 0 1px var(--bone);position:relative;overflow:hidden;
+  transition:transform .35s var(--ease-out),background .3s ease;
+}
+.svc:hover{transform:translateY(-4px)}
+.svc.dark{background:var(--char);box-shadow:none;color:var(--paper)}
+.svc-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:24px}
+.svc .idx{font-family:var(--f-mono);font-size:13px;color:var(--fog)}
+.svc.dark .idx{color:#b6ad9b}
+.svc .status{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:5px 10px;border-radius:var(--r-pill)}
+.status-now{background:var(--amber);color:var(--ink)}
+.status-soon{background:transparent;color:#cfc6b3;box-shadow:inset 0 0 0 1px rgba(255,255,255,.22)}
+.svc h3{font-size:clamp(22px,2.6vw,30px);font-weight:600;letter-spacing:-.025em;margin-bottom:12px}
+.svc.dark h3{color:var(--paper)}
+.svc .desc{color:var(--ink-soft);max-width:38ch;font-size:15.5px}
+.svc.dark .desc{color:#cdc5b4}
+.svc ul{list-style:none;margin-top:24px;display:grid;gap:1px;background:var(--bone);border-radius:var(--r-ctrl);overflow:hidden}
+.svc.dark ul{background:rgba(255,255,255,.1)}
+.svc li{background:var(--limestone);padding:13px 15px;font-family:var(--f-disp);font-weight:500;font-size:14.5px;display:flex;align-items:center;gap:10px}
+.svc.dark li{background:var(--char)}
+.svc li svg{width:15px;height:15px;color:var(--amber-deep);flex:0 0 auto}
+.svc.dark li svg{color:var(--amber)}
+.svc .more{display:inline-flex;align-items:center;gap:8px;margin-top:24px;font-family:var(--f-disp);font-weight:500;font-size:15px}
+.svc .more .arw{transition:transform .2s var(--ease-out)}
+.svc:hover .more .arw{transform:translateX(4px)}
+
+/* ============================================================ WORK (bento gallery) */
+.work-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;grid-template-rows:repeat(2,minmax(190px,1fr));gap:14px}
+.work-card{position:relative;border-radius:var(--r-card);overflow:hidden;background:var(--limestone-2);box-shadow:inset 0 0 0 1px var(--bone);min-height:190px}
+.work-card:nth-child(1){grid-row:span 2}
+.work-card:nth-child(2){grid-column:2 / span 2}
+.work-card img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease-out)}
+.work-card:hover img{transform:scale(1.05)}
+.work-card .ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,18,12,0) 38%,rgba(20,18,12,.72) 100%)}
+.work-meta{position:absolute;left:16px;bottom:14px;right:16px}
+.work-meta .cat{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--amber);display:block;margin-bottom:5px}
+.work-meta .nm{font-family:var(--f-disp);font-weight:600;font-size:17px;color:#fff;letter-spacing:-.01em}
+.work-meta .loc{font-size:12.5px;color:rgba(255,255,255,.8);font-family:var(--f-mono)}
+
+/* ============================================================ PROCESS */
+.process{background:var(--paper-deep);border-radius:var(--r-card);box-shadow:inset 0 0 0 1px var(--bone)}
+.proc-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+.proc{padding:clamp(28px,3vw,40px) clamp(22px,2.4vw,30px);position:relative}
+.proc+.proc{box-shadow:inset 1px 0 0 var(--bone)}
+.proc .pn{font-family:var(--f-mono);font-size:13px;color:var(--amber-deep);font-weight:700}
+.proc h3{font-size:22px;font-weight:600;margin:18px 0 10px;letter-spacing:-.02em}
+.proc p{color:var(--fog);font-size:14.5px;line-height:1.5}
+.proc .bar{height:3px;width:34px;background:var(--amber);border-radius:2px;margin-top:22px;transition:width .5s var(--ease-out)}
+.proc:hover .bar{width:64px}
+
+/* ============================================================ PRICING */
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:stretch}
+.tier{
+  background:var(--limestone);border-radius:var(--r-card);padding:clamp(26px,2.8vw,34px);
+  box-shadow:inset 0 0 0 1px var(--bone);display:flex;flex-direction:column;position:relative;
+  transition:transform .35s var(--ease-out);
+}
+.tier:hover{transform:translateY(-5px)}
+.tier.pop{background:var(--ink);color:var(--paper);box-shadow:0 18px 40px -22px rgba(23,21,16,.6)}
+.tier .badge{position:absolute;top:18px;right:18px;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;background:var(--amber);color:var(--ink);padding:5px 10px;border-radius:var(--r-pill)}
+.tier .tname{font-family:var(--f-disp);font-weight:600;font-size:19px;letter-spacing:-.01em}
+.tier .tprice{font-family:var(--f-disp);font-weight:600;font-size:clamp(34px,3.8vw,46px);letter-spacing:-.03em;margin:16px 0 4px;line-height:1}
+.tier .tprice .c{color:var(--amber-deep);font-size:.55em;vertical-align:.42em;margin-right:2px}
+.tier.pop .tprice .c{color:var(--amber)}
+.tier .once{font-family:var(--f-mono);font-size:11.5px;color:var(--fog)}
+.tier.pop .once{color:#b6ad9b}
+.tier .tdesc{font-size:14.5px;color:var(--ink-soft);margin:18px 0 22px;border-top:1px solid var(--bone);padding-top:18px}
+.tier.pop .tdesc{color:#cdc5b4;border-color:rgba(255,255,255,.14)}
+.tier ul{list-style:none;display:grid;gap:11px;margin-bottom:26px;flex:1}
+.tier li{display:flex;gap:10px;font-size:14.5px;color:var(--ink-soft);align-items:flex-start}
+.tier.pop li{color:#e2dccc}
+.tier li svg{width:16px;height:16px;color:var(--amber-deep);flex:0 0 auto;margin-top:2px}
+.tier.pop li svg{color:var(--amber)}
+.price-foot{text-align:center;margin-top:26px;font-size:15px;color:var(--fog)}
+.price-foot a{color:var(--amber-deep);font-weight:600;border-bottom:1.5px solid var(--amber)}
+
+/* ============================================================ FAQ */
+.faq-wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(30px,4vw,64px);align-items:start}
+.faq-list{display:grid;gap:0;border-top:1px solid var(--bone)}
+.faq-item{border-bottom:1px solid var(--bone)}
+.faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:18px;text-align:left;padding:24px 4px;font-family:var(--f-disp);font-weight:500;font-size:clamp(16.5px,1.9vw,20px);letter-spacing:-.01em;color:var(--ink);transition:color .2s ease}
+.faq-q:hover{color:var(--amber-deep)}
+.faq-ico{flex:0 0 auto;width:26px;height:26px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--bone);display:grid;place-items:center;position:relative;transition:background .25s ease,box-shadow .25s ease}
+.faq-item[data-open="true"] .faq-ico{background:var(--amber);box-shadow:none}
+.faq-ico::before,.faq-ico::after{content:"";position:absolute;background:var(--ink);border-radius:2px;transition:transform .28s var(--ease-out),opacity .2s ease}
+.faq-ico::before{width:11px;height:2px}
+.faq-ico::after{width:2px;height:11px}
+.faq-item[data-open="true"] .faq-ico::after{transform:rotate(90deg);opacity:0}
+.faq-a{overflow:hidden;height:0;transition:height .34s var(--ease-io)}
+.faq-a-inner{padding:0 4px 26px;color:var(--ink-soft);max-width:58ch;font-size:15.5px;line-height:1.6}
+
+/* ============================================================ CTA + FORM */
+.cta{background:var(--char);color:var(--paper);border-radius:var(--r-card);overflow:hidden}
+.cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.cta-left{padding:clamp(34px,4.4vw,64px);display:flex;flex-direction:column;justify-content:center;position:relative}
+.cta-left::after{content:"";position:absolute;right:0;top:14%;bottom:14%;width:1px;background:rgba(255,255,255,.1)}
+.cta-left h2{color:var(--paper);font-size:clamp(28px,3.6vw,44px);font-weight:600;letter-spacing:-.03em;line-height:1.02;max-width:14ch}
+.cta-left .k{color:#b6ad9b}
+.cta-left .pts{margin-top:28px;display:grid;gap:14px}
+.cta-left .pt{display:flex;gap:12px;align-items:center;color:#d5cdbc;font-size:15px}
+.cta-left .pt svg{width:18px;height:18px;color:var(--amber);flex:0 0 auto}
+.cta-form{padding:clamp(34px,4.4vw,64px);background:var(--char-2)}
+.field{margin-bottom:14px}
+.field label{display:block;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:#b6ad9b;margin-bottom:7px}
+.field input{
+  width:100%;background:rgba(255,255,255,.05);color:var(--paper);
+  border-radius:var(--r-ctrl);padding:13px 14px;font-family:var(--f-body);font-size:15px;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.16);transition:box-shadow .2s ease,background .2s ease;
+}
+.field input::placeholder{color:#867f70}
+.field input:focus{outline:none;background:rgba(255,255,255,.09);box-shadow:inset 0 0 0 1.5px var(--amber)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.cta-form .btn-amber{width:100%;justify-content:center;margin-top:8px;padding:15px}
+.form-note{font-family:var(--f-mono);font-size:11.5px;color:#867f70;margin-top:14px;text-align:center}
+.form-success{display:none;text-align:center;padding:20px 0}
+.form-success.show{display:block;animation:popin .45s var(--ease-out)}
+@keyframes popin{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+.form-success .ck{width:54px;height:54px;border-radius:50%;background:var(--amber);display:grid;place-items:center;margin:0 auto 18px}
+.form-success .ck svg{width:26px;height:26px;color:var(--ink)}
+.form-success h3{color:var(--paper);font-size:24px;margin-bottom:10px}
+.form-success p{color:#cdc5b4;font-size:15px;max-width:34ch;margin-inline:auto}
+
+/* ============================================================ FOOTER */
+footer{background:var(--ink);color:var(--paper);padding-top:clamp(54px,6vw,84px)}
+.foot-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:clamp(28px,3vw,48px);padding-bottom:54px}
+.foot-brand .brand{color:var(--paper);font-size:22px}
+.foot-brand .brand .mark{background:var(--amber)}
+.foot-brand .brand .mark svg path{stroke:var(--ink)}
+.foot-blurb{color:#a39b8a;font-size:14.5px;max-width:32ch;margin-top:18px;line-height:1.6}
+.foot-tag{font-family:var(--f-mono);font-size:12px;color:var(--amber);margin-top:18px;letter-spacing:.03em}
+.foot-col h4{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:#867f70;margin-bottom:18px;font-weight:400}
+.foot-col a{display:block;color:#cdc5b4;font-size:14.5px;padding:6px 0;transition:color .18s ease}
+.foot-col a:hover{color:var(--amber)}
+.foot-bottom{border-top:1px solid rgba(255,255,255,.1);padding:24px 0;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.foot-bottom p{font-family:var(--f-mono);font-size:12px;color:#867f70}
+.foot-bottom .loc{color:#a39b8a}
+
+/* ============================================================ REVEAL */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease-out),transform .7s var(--ease-out)}
+.reveal.in{opacity:1;transform:none}
+
+/* ============================================================ RESPONSIVE */
+@media (max-width:980px){
+  .hero-grid{grid-template-columns:1fr;gap:30px}
+  .hero-media{aspect-ratio:16/11;order:-1}
+  .services{grid-template-columns:1fr}
+  .work-grid{grid-template-columns:1fr 1fr;grid-template-rows:none}
+  .work-card:nth-child(1){grid-row:auto;grid-column:1 / -1;aspect-ratio:16/9}
+  .work-card:nth-child(2){grid-column:auto}
+  .proc-grid{grid-template-columns:1fr 1fr}
+  .proc:nth-child(odd){box-shadow:none}
+  .proc:nth-child(3),.proc:nth-child(4){box-shadow:inset 0 1px 0 var(--bone)}
+  .proc:nth-child(even){box-shadow:inset 1px 0 0 var(--bone)}
+  .proc:nth-child(4){box-shadow:inset 1px 0 0 var(--bone),inset 0 1px 0 var(--bone)}
+  .price-grid{grid-template-columns:1fr;max-width:460px;margin-inline:auto}
+  .faq-wrap{grid-template-columns:1fr;gap:24px}
+  .cta-grid{grid-template-columns:1fr}
+  .cta-left::after{display:none}
+  .cta-left{border-bottom:1px solid rgba(255,255,255,.1)}
+  .foot-top{grid-template-columns:1fr 1fr}
+  .foot-brand{grid-column:1 / -1}
+}
+@media (max-width:760px){
+  .nav-links,.nav-right .btn-ghost{display:none}
+  .nav-toggle{display:inline-flex}
+  .stats-inner{grid-template-columns:1fr 1fr}
+  .stat:nth-child(3),.stat:nth-child(4){box-shadow:inset 0 1px 0 rgba(255,255,255,.09)}
+  .stat:nth-child(2),.stat:nth-child(4){box-shadow:inset 1px 0 0 rgba(255,255,255,.09)}
+  .stat:nth-child(4){box-shadow:inset 1px 0 0 rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.09)}
+  .row2{grid-template-columns:1fr}
+}
+@media (max-width:480px){
+  .work-grid{grid-template-columns:1fr}
+  .work-card:nth-child(1){aspect-ratio:4/3}
+  .proc-grid{grid-template-columns:1fr}
+  .proc{box-shadow:none!important}
+  .proc+.proc{box-shadow:inset 0 1px 0 var(--bone)!important}
+  .stats-inner{grid-template-columns:1fr}
+  .stat{box-shadow:none!important}
+  .stat+.stat{box-shadow:inset 0 1px 0 rgba(255,255,255,.09)!important}
+  .foot-top{grid-template-columns:1fr}
+}
+
+/* mobile nav drawer */
+#mnav{display:none;position:fixed;inset:0;z-index:90}
+#mnav.open{display:block}
+#mnav .scrim{position:absolute;inset:0;background:rgba(23,21,16,.5);backdrop-filter:blur(2px)}
+#mnav .panel{position:absolute;top:0;right:0;bottom:0;width:min(82vw,330px);background:var(--paper);padding:24px;display:flex;flex-direction:column;gap:6px;box-shadow:-20px 0 50px -20px rgba(0,0,0,.3);transform:translateX(100%);transition:transform .35s var(--ease-io)}
+#mnav.open .panel{transform:none}
+#mnav .panel a{font-family:var(--f-disp);font-weight:500;font-size:18px;padding:13px 12px;border-radius:var(--r-ctrl);color:var(--ink)}
+#mnav .panel a:hover{background:var(--limestone)}
+#mnav .panel .btn-amber{margin-top:14px;justify-content:center}
+#mnav .close{align-self:flex-end;width:42px;height:42px;border-radius:var(--r-ctrl);box-shadow:inset 0 0 0 1.5px var(--bone);display:grid;place-items:center;margin-bottom:8px}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .reveal{opacity:1;transform:none}
+  .hero h1 .glow::after{transform:scaleX(1)}
+}
+</style>
+</head>
+<body>
+
+<!-- ===================================================== HEADER -->
+<header id="hd">
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="Lumen Marketing home">
+      <span class="mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M9 8 v16 h11" fill="none" stroke="#f1c40a" stroke-width="3.6" stroke-linecap="square"/></svg></span>
+      Lumen
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#services">Websites</a>
+      <a href="#work">Work</a>
+      <a href="#services">Software</a>
+      <a href="#process">Process</a>
+      <a href="#faq">About</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-right">
+      <a class="btn btn-ghost" href="#audit">Free site audit</a>
+      <a class="btn btn-amber" href="#audit">Get found <span class="arw">→</span></a>
+      <button class="nav-toggle" id="navOpen" aria-label="Open menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- mobile drawer -->
+<div id="mnav" aria-hidden="true">
+  <div class="scrim" data-close></div>
+  <div class="panel" role="dialog" aria-label="Menu">
+    <button class="close" data-close aria-label="Close menu">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <a href="#services" data-close>Websites</a>
+    <a href="#work" data-close>Work</a>
+    <a href="#services" data-close>Software</a>
+    <a href="#process" data-close>Process</a>
+    <a href="#faq" data-close>About</a>
+    <a href="#faq" data-close>FAQ</a>
+    <a class="btn btn-amber" href="#audit" data-close>Get a free site audit →</a>
+  </div>
+</div>
+
+<main id="top">
+
+<!-- ===================================================== HERO -->
+<section class="hero wrap" id="hero">
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <span class="kicker">Performance marketing · Greater Phoenix</span>
+      <h1>Be the <span class="glow">brightest</span> result in your market.</h1>
+      <p class="sub">Lumen builds fast, mobile, search-ready websites for home-service, construction &amp; local businesses — engineered to rank on Google, load in under a second, and turn clicks into booked jobs.</p>
+      <div class="hero-cta">
+        <a class="btn btn-amber" href="#audit">Get a free site audit <span class="arw">→</span></a>
+        <a class="btn btn-ghost" href="#services">See what's included</a>
+      </div>
+      <div class="trust">
+        <p>Built by contractors, for contractors · Serving Greater Phoenix &amp; the East Valley.</p>
+        <div class="builds">
+          <span class="build-chip">Quest Roofing</span>
+          <span class="build-chip">Saguaro Cabinetry</span>
+          <span class="build-chip">Quest Drafting</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-media" id="heroMedia">
+      <img class="poster" src="https://loremflickr.com/1200/1500/construction,site,crane?lock=88" width="1200" height="1500" alt="Aerial view of an active construction site in Greater Phoenix" fetchpriority="high" />
+      <video id="heroVid" muted loop playsinline preload="none" poster="https://loremflickr.com/1200/1500/construction,site,crane?lock=88" aria-hidden="true">
+        <source src="https://videos.pexels.com/video-files/2098989/2098989-sd_960_540_30fps.mp4" type="video/mp4" />
+        <source src="https://videos.pexels.com/video-files/2098989/2098989-hd_1920_1080_30fps.mp4" type="video/mp4" />
+      </video>
+      <div class="scrim"></div>
+      <div class="media-tag">
+        <span class="pill">Built in the East Valley</span>
+        <span class="pill live"><span class="dot"></span>Ranking on Google</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================== STATS -->
+<section class="wrap" style="padding-block:clamp(8px,2vw,18px)">
+  <div class="stats reveal">
+    <div class="stats-inner">
+      <div class="stat"><div class="num">&lt;<span data-count="1">1</span><span class="u">s</span></div><div class="lab">Loads under a second on phones</div></div>
+      <div class="stat"><div class="num"><span data-count="100">0</span><span class="u">%</span></div><div class="lab">You own your site, domain &amp; content</div></div>
+      <div class="stat"><div class="num"><span data-count="60">0</span>–<span data-count="90">0</span></div><div class="lab">Days to competitive local rankings</div></div>
+      <div class="stat"><div class="num"><span data-count="0">0</span></div><div class="lab">Long-term contracts. Ever.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================== SERVICES -->
+<section class="wrap section-pad" id="services">
+  <div class="sec-head reveal">
+    <h2>Two ways we get you booked.</h2>
+    <p class="lede">A site that wins the click, and software that runs the job once it's yours. Start with the website — the software is rolling out to early clients now.</p>
+  </div>
+  <div class="services">
+    <article class="svc reveal">
+      <div class="svc-top">
+        <span class="idx">01 / Service</span>
+        <span class="status status-now">Available now</span>
+      </div>
+      <h3>Website building</h3>
+      <p class="desc">A fast, mobile-first site engineered to show up on Google and turn visitors into phone calls — not just look pretty.</p>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg>Sub-second load times</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/></svg>Mobile-first, every screen</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4-4"/></svg>SEO foundations baked in</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.5 5.5 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.5-6.5A2 2 0 0 0 16.7 4H7.3a2 2 0 0 0-1.8 1.5z"/></svg>Built to convert clicks</li>
+      </ul>
+      <a class="more" href="#audit">See what's included <span class="arw">→</span></a>
+    </article>
+
+    <article class="svc dark reveal">
+      <div class="svc-top">
+        <span class="idx">02 / Service</span>
+        <span class="status status-soon">Early access</span>
+      </div>
+      <h3>Software for contractors</h3>
+      <p class="desc">The back office, minus the busywork. One place to track every lead from first call to final invoice — built around how trades actually work.</p>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h7"/></svg>Pipelines</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M9 7h6M9 11h6M9 15h4"/><rect x="5" y="3" width="14" height="18" rx="2"/></svg>Estimating</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M14 2v6h6"/><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>Proposals</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M3 21h18M5 21V8l7-5 7 5v13"/></svg>Production</li>
+      </ul>
+      <a class="more" href="#audit" style="color:var(--amber)">Join early access <span class="arw">→</span></a>
+    </article>
+  </div>
+</section>
+
+<!-- ===================================================== WORK -->
+<section class="wrap section-pad" id="work" style="padding-top:0">
+  <div class="sec-head reveal">
+    <h2>Recent builds, real trades.</h2>
+    <p class="lede">Local contractors across the East Valley — each site fast, findable, and built to book the next job.</p>
+  </div>
+  <div class="work-grid reveal">
+    <a class="work-card" href="#audit">
+      <img loading="lazy" src="https://loremflickr.com/900/1100/roofing,house,roof?lock=24" width="900" height="1100" alt="Quest Roofing — completed residential roof in Queen Creek, Arizona" />
+      <div class="ov"></div>
+      <div class="work-meta"><span class="cat">Roofing</span><span class="nm">Quest Roofing</span><span class="loc">Queen Creek, AZ</span></div>
+    </a>
+    <a class="work-card" href="#audit">
+      <img loading="lazy" src="https://loremflickr.com/1200/700/kitchen,cabinetry,wood?lock=31" width="1200" height="700" alt="Saguaro Cabinetry — custom kitchen cabinetry installation in Gilbert, Arizona" />
+      <div class="ov"></div>
+      <div class="work-meta"><span class="cat">Cabinetry</span><span class="nm">Saguaro Cabinetry</span><span class="loc">Gilbert, AZ</span></div>
+    </a>
+    <a class="work-card" href="#audit">
+      <img loading="lazy" src="https://loremflickr.com/800/800/blueprint,drafting,plans?lock=47" width="800" height="800" alt="Quest Drafting &amp; Design — architectural drafting and blueprints for Greater Phoenix" />
+      <div class="ov"></div>
+      <div class="work-meta"><span class="cat">Drafting</span><span class="nm">Quest Drafting &amp; Design</span><span class="loc">Greater Phoenix</span></div>
+    </a>
+  </div>
+</section>
+
+<!-- ===================================================== PROCESS -->
+<section class="wrap section-pad" id="process" style="padding-top:0">
+  <div class="sec-head reveal">
+    <h2>How a Lumen build runs.</h2>
+    <p class="lede">No mystery, no months of waiting. Four steps from where you are today to ranking and booking.</p>
+  </div>
+  <div class="process reveal">
+    <div class="proc-grid">
+      <div class="proc"><span class="pn">01</span><h3>Audit</h3><p>We find exactly where your current site (or no site) is leaking jobs to competitors.</p><div class="bar"></div></div>
+      <div class="proc"><span class="pn">02</span><h3>Build</h3><p>A fast, mobile, search-ready site written around your trade, your city, and your phone.</p><div class="bar"></div></div>
+      <div class="proc"><span class="pn">03</span><h3>Launch</h3><p>Live on your own domain with SEO, schema and analytics wired in from day one.</p><div class="bar"></div></div>
+      <div class="proc"><span class="pn">04</span><h3>Optimize</h3><p>We watch the rankings and the leads, then sharpen the pages that bring in real calls.</p><div class="bar"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================== PRICING -->
+<section class="wrap section-pad" id="pricing" style="padding-top:0">
+  <div class="sec-head reveal">
+    <h2>One-time pricing. No contracts.</h2>
+    <p class="lede">Pay once, own everything. Pick the build that fits where your business is right now — every tier is yours to keep.</p>
+  </div>
+  <div class="price-grid">
+    <article class="tier reveal">
+      <div class="tname">Spark</div>
+      <div class="tprice"><span class="c">$</span>1,500</div>
+      <div class="once">One-time · own it forever</div>
+      <p class="tdesc">Get found and be reachable. A clean one-page site that puts your trade, city and number front and center.</p>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Single-page, mobile-first site</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Click-to-call &amp; local SEO basics</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Google Business setup help</li>
+      </ul>
+      <a class="btn btn-ghost" href="#audit" style="justify-content:center">Start with an audit</a>
+    </article>
+
+    <article class="tier pop reveal">
+      <span class="badge">Most popular</span>
+      <div class="tname">Glow</div>
+      <div class="tprice"><span class="c">$</span>2,999</div>
+      <div class="once">One-time · own it forever</div>
+      <p class="tdesc">Compete with the established locals. A multi-section site with a work gallery, lead form and full SEO.</p>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Everything in Spark</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Work gallery, reviews &amp; FAQ</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Lead form + email alerts</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Analytics &amp; conversion tuning</li>
+      </ul>
+      <a class="btn btn-amber" href="#audit" style="justify-content:center">Get a free audit →</a>
+    </article>
+
+    <article class="tier reveal">
+      <div class="tname">Beacon</div>
+      <div class="tprice"><span class="c">$</span>4,999</div>
+      <div class="once">One-time · own it forever</div>
+      <p class="tdesc">Be the best in your market. A full multi-page build with per-service pages, content and AI-search optimization.</p>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Everything in Glow</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Per-service pages &amp; blog</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>AI-search &amp; content build-out</li>
+      </ul>
+      <a class="btn btn-ghost" href="#audit" style="justify-content:center">Start with an audit</a>
+    </article>
+  </div>
+  <p class="price-foot reveal">Not sure which fits? <a href="#audit">Start with a free audit.</a></p>
+</section>
+
+<!-- ===================================================== FAQ -->
+<section class="wrap section-pad" id="faq" style="padding-top:0">
+  <div class="faq-wrap">
+    <div class="reveal">
+      <span class="kicker">Straight answers</span>
+      <h2 style="font-family:var(--f-disp);font-size:clamp(28px,3.8vw,46px);font-weight:600;letter-spacing:-.03em;margin-top:18px;line-height:1.02">The questions every contractor asks us.</h2>
+      <p style="color:var(--fog);margin-top:18px;max-width:34ch">No sales pitch. Here's the honest version of what we'd tell you over the phone.</p>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item" data-open="true">
+        <button class="faq-q" aria-expanded="true">I've run on referrals for years — do I even need a website?<span class="faq-ico" aria-hidden="true"></span></button>
+        <div class="faq-a"><div class="faq-a-inner">Referrals are gold — but most of them check you online before they call. When they search your name and find nothing (or a half-finished Facebook page), the doubt creeps in. A sharp site doesn't replace word of mouth; it backs it up so the referral actually books.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">I already get enough work from word of mouth.<span class="faq-ico" aria-hidden="true"></span></button>
+        <div class="faq-a"><div class="faq-a-inner">Then you're in a great spot to be picky. A site lets you stop chasing low-paying jobs and start showing up for the bigger ones in your area that are searching Google right now — work your competitors are quietly winning while you're busy.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Is it really worth the money?<span class="faq-ico" aria-hidden="true"></span></button>
+        <div class="faq-a"><div class="faq-a-inner">One booked job usually covers it. It's a one-time cost and you own the site, the domain and the content forever — no monthly rental, no lock-in. If a single roof, kitchen or remodel pays for the whole build, the math tends to answer itself.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================== CTA / AUDIT -->
+<section class="wrap section-pad" id="audit" style="padding-top:0">
+  <div class="cta reveal">
+    <div class="cta-grid">
+      <div class="cta-left">
+        <span class="kicker k" style="color:#b6ad9b">Free · no obligation</span>
+        <h2 style="margin-top:18px">Let's find out where you're leaking jobs.</h2>
+        <div class="pts">
+          <div class="pt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>A plain-English review of your online presence</div>
+          <div class="pt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Where competitors are out-ranking you locally</div>
+          <div class="pt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>No contract, no pressure — just the numbers</div>
+        </div>
+      </div>
+      <div class="cta-form">
+        <form id="auditForm" novalidate>
+          <div id="formFields">
+            <div class="field">
+              <label for="f-name">Your name</label>
+              <input id="f-name" name="name" type="text" autocomplete="name" placeholder="Jordan Reyes" required />
+            </div>
+            <div class="field">
+              <label for="f-biz">Business name</label>
+              <input id="f-biz" name="business" type="text" autocomplete="organization" placeholder="Reyes Roofing Co." required />
+            </div>
+            <div class="row2">
+              <div class="field">
+                <label for="f-phone">Phone</label>
+                <input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="(480) 555-0142" required />
+              </div>
+              <div class="field">
+                <label for="f-site">Current website</label>
+                <input id="f-site" name="website" type="text" placeholder="none yet — that's fine" />
+              </div>
+            </div>
+            <div class="field">
+              <label for="f-email">Email</label>
+              <input id="f-email" name="email" type="email" autocomplete="email" placeholder="you@business.com" required />
+            </div>
+            <input class="hp" type="text" name="company_url" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <button class="btn btn-amber" type="submit">Send my free audit request <span class="arw">→</span></button>
+            <p class="form-note">We reply within one business day · hello@joinlumenmarketing.com</p>
+          </div>
+          <div class="form-success" id="formOk" role="status" aria-live="polite">
+            <div class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></div>
+            <h3>Request received.</h3>
+            <p>Thanks — we'll have your free audit back to you within one business day.</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===================================================== FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a class="brand" href="#top">
+          <span class="mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M9 8 v16 h11" fill="none" stroke="#171510" stroke-width="3.6" stroke-linecap="square"/></svg></span>
+          Lumen
+        </a>
+        <p class="foot-blurb">Fast, search-ready websites &amp; software for home-service, construction and local contractors across Greater Phoenix.</p>
+        <p class="foot-tag">Get found. Get booked.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Services</h4>
+        <a href="#services">Website building</a>
+        <a href="#services">Contractor software</a>
+        <a href="#process">Our process</a>
+        <a href="#pricing">Pricing</a>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <a href="#work">Recent work</a>
+        <a href="#faq">About Lumen</a>
+        <a href="#faq">FAQ</a>
+        <a href="#audit">Free audit</a>
+      </div>
+      <div class="foot-col">
+        <h4>Get in touch</h4>
+        <a href="mailto:hello@joinlumenmarketing.com">hello@joinlumenmarketing.com</a>
+        <a href="#audit">Request an audit</a>
+        <a href="#top">Gilbert, AZ</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p>© 2026 Lumen Marketing</p>
+      <p class="loc">Get found. Get booked. · Gilbert, AZ</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var rm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* sticky header style */
+  var hd = document.getElementById('hd');
+  var onScroll = function(){ hd.classList.toggle('scrolled', window.scrollY > 12); };
+  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+
+  /* mobile nav */
+  var mnav = document.getElementById('mnav');
+  document.getElementById('navOpen').addEventListener('click', function(){
+    mnav.classList.add('open'); mnav.setAttribute('aria-hidden','false'); this.setAttribute('aria-expanded','true');
+  });
+  mnav.addEventListener('click', function(e){
+    if(e.target.hasAttribute('data-close') || e.target.closest('[data-close]')){
+      mnav.classList.remove('open'); mnav.setAttribute('aria-hidden','true');
+      document.getElementById('navOpen').setAttribute('aria-expanded','false');
+    }
+  });
+
+  /* reveal on scroll */
+  var revs = document.querySelectorAll('.reveal');
+  if(rm || !('IntersectionObserver' in window)){ revs.forEach(function(r){r.classList.add('in');}); }
+  else{
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {threshold:.14, rootMargin:'0px 0px -8% 0px'});
+    revs.forEach(function(r){ io.observe(r); });
+  }
+
+  /* counters */
+  function animateCount(el){
+    var target = parseFloat(el.getAttribute('data-count'));
+    if(rm){ el.textContent = target; return; }
+    var dur = 1300, start = null;
+    function step(ts){
+      if(!start) start = ts;
+      var p = Math.min((ts-start)/dur, 1);
+      var eased = 1 - Math.pow(1-p, 3);
+      el.textContent = Math.round(target * eased);
+      if(p<1) requestAnimationFrame(step);
+      else el.textContent = target;
+    }
+    requestAnimationFrame(step);
+  }
+  var statBox = document.querySelector('.stats');
+  if(statBox){
+    var seen=false;
+    var sio = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(e.isIntersecting && !seen){ seen=true; document.querySelectorAll('[data-count]').forEach(animateCount); sio.disconnect(); }
+      });
+    }, {threshold:.4});
+    sio.observe(statBox);
+  }
+
+  /* hero video — lazy, reduced-motion = poster only */
+  var media = document.getElementById('heroMedia'), vid = document.getElementById('heroVid');
+  if(vid && !rm){
+    var tryPlay = function(){
+      var p = vid.play();
+      if(p && p.then){ p.then(function(){ media.classList.add('playing'); }).catch(function(){}); }
+      else media.classList.add('playing');
+    };
+    var vio = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(e.isIntersecting){ vid.preload='auto'; vid.load();
+          vid.addEventListener('canplay', tryPlay, {once:true}); vio.disconnect(); }
+      });
+    }, {threshold:.25});
+    vio.observe(media);
+  }
+
+  /* FAQ accordion */
+  document.querySelectorAll('.faq-item').forEach(function(item){
+    var btn = item.querySelector('.faq-q'), panel = item.querySelector('.faq-a');
+    var set = function(open){
+      item.setAttribute('data-open', open);
+      btn.setAttribute('aria-expanded', open);
+      panel.style.height = open ? panel.firstElementChild.offsetHeight + 'px' : '0px';
+    };
+    /* init */
+    set(item.getAttribute('data-open') === 'true');
+    btn.addEventListener('click', function(){
+      var isOpen = item.getAttribute('data-open') === 'true';
+      document.querySelectorAll('.faq-item').forEach(function(o){
+        if(o!==item){ o.setAttribute('data-open','false'); o.querySelector('.faq-q').setAttribute('aria-expanded','false'); o.querySelector('.faq-a').style.height='0px'; }
+      });
+      set(!isOpen);
+    });
+  });
+  window.addEventListener('resize', function(){
+    var open = document.querySelector('.faq-item[data-open="true"] .faq-a');
+    if(open) open.style.height = open.firstElementChild.offsetHeight + 'px';
+  });
+
+  /* form — client-side success */
+  var form = document.getElementById('auditForm');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if(form.company_url.value){ return; } /* honeypot */
+    var req = ['name','business','phone','email'], ok = true;
+    req.forEach(function(n){
+      var f = form[n];
+      if(!f.value.trim()){ ok=false; f.style.boxShadow='inset 0 0 0 1.5px #f1c40a'; }
+    });
+    if(!ok){ return; }
+    document.getElementById('formFields').style.display='none';
+    document.getElementById('formOk').classList.add('show');
+  });
+})();
+</script>
+</body>
+</html>
