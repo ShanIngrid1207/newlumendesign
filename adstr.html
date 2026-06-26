@@ -94,11 +94,11 @@
   .trust .names span{font-family:"Syne"; font-weight:700; font-size:.96rem; color:var(--ink); opacity:.62}
 
   /* ---------- vertical marquee ---------- */
-  .reel{position:relative; height:clamp(460px,80vh,760px); display:grid; grid-template-columns:repeat(3,1fr); gap:14px;
+  .reel{position:relative; height:clamp(460px,80vh,760px); display:grid; grid-template-columns:repeat(2,1fr); gap:9px;
     -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 9%,#000 91%,transparent 100%);
             mask-image:linear-gradient(180deg,transparent 0,#000 9%,#000 91%,transparent 100%)}
   .col{overflow:hidden}
-  .col-inner{display:flex; flex-direction:column; gap:14px; will-change:transform; animation:scrollUp linear infinite}
+  .col-inner{display:flex; flex-direction:column; gap:9px; will-change:transform; animation:scrollUp linear infinite}
   .col-1 .col-inner{animation-duration:42s}
   .col-2 .col-inner{animation-duration:54s; animation-direction:reverse}
   .col-3 .col-inner{animation-duration:48s}
@@ -106,9 +106,9 @@
   @keyframes scrollUp{from{transform:translateY(0)} to{transform:translateY(-50%)}}
   @media (max-width:560px){.reel{grid-template-columns:repeat(2,1fr)}.col-3{display:none}}
 
-  .tile{position:relative; width:100%; flex:0 0 auto; border-radius:var(--r-md); overflow:hidden; background:var(--panel);
+  .tile{display:block; position:relative; width:100%; flex:0 0 auto; border-radius:var(--r-md); overflow:hidden; background:var(--panel);
     border:1px solid var(--line); box-shadow:0 12px 30px -22px rgba(20,22,15,.5);
-    aspect-ratio:4/5; transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .3s}
+    aspect-ratio:16/10; transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .3s}
   .tile img,.tile video{width:100%; height:100%; object-fit:cover; object-position:top center; transition:transform .6s var(--ease)}
   .tile .cap{position:absolute; left:0; right:0; bottom:0; padding:32px 14px 13px;
     background:linear-gradient(0deg,rgba(15,16,11,.82),transparent); color:#fff;
@@ -237,29 +237,24 @@
       </div>
     </div>
 
-    <!-- vertical auto-scrolling reel of website mockups -->
-    <div class="reel reveal" id="reel" aria-label="Recent websites built by Lumen" role="img">
+    <!-- vertical auto-scrolling reel — click a site to open the live build -->
+    <div class="reel reveal" id="reel" aria-label="Recent websites built by Lumen — click any site to open it">
       <div class="col col-1"><div class="col-inner" data-loop>
-        <figure class="tile" data-hot><span class="tag">Live</span><img src="assets/mockups/site-porsche.png" alt="Atelier website design for a luxury remodeler" loading="eager"><figcaption class="cap"><b>Atelier</b><small>Luxury remodeler · +38% leads</small></figcaption></figure>
-        <figure class="tile" data-hot><img src="assets/stock/web-196644.jpg" alt="Front-end build in progress"><figcaption class="cap"><b>Build sprint</b><small>Design → live in 2 weeks</small></figcaption></figure>
-        <figure class="tile" data-hot><span class="tag">Live</span><img src="assets/mockups/site-stripe.png" alt="Gridwork SaaS dashboard website"><figcaption class="cap"><b>Gridwork</b><small>Software for trades</small></figcaption></figure>
-        <figure class="tile" data-hot><img src="assets/stock/web-5474295.jpg" alt="Designer working on a laptop"><figcaption class="cap"><b>In the studio</b><small>Pixel QA on every page</small></figcaption></figure>
+        <a class="tile" data-hot href="porsche.html" aria-label="Open the Atelier site"><span class="tag">Live</span><img src="assets/mockups/site-porsche.png" alt="Atelier — website for a luxury remodeler" loading="eager"><span class="cap"><b>Atelier</b><small>Luxury remodeler · open site →</small></span></a>
+        <a class="tile" data-hot href="index.html"><img src="assets/stock/web-196644.jpg" alt="Front-end build in progress"><span class="cap"><b>Build sprint</b><small>Design → live in 2 weeks</small></span></a>
+        <a class="tile" data-hot href="stripe.html" aria-label="Open the Gridwork site"><span class="tag">Live</span><img src="assets/mockups/site-stripe.png" alt="Gridwork — SaaS dashboard site for trades"><span class="cap"><b>Gridwork</b><small>Software for trades · open site →</small></span></a>
+        <a class="tile" data-hot href="index.html"><img src="assets/stock/web-5474295.jpg" alt="Designer working on a laptop"><span class="cap"><b>In the studio</b><small>Pixel QA on every page</small></span></a>
+        <a class="tile" data-hot href="apple.html" aria-label="Open the Monolith site"><span class="tag">Live</span><img src="assets/mockups/site-apple.png" alt="Monolith — product launch site"><span class="cap"><b>Monolith</b><small>Product launch · open site →</small></span></a>
+        <a class="tile" data-hot href="index.html"><img src="assets/stock/web-4974915.jpg" alt="Code on a screen"><span class="cap"><b>Code that ranks</b><small>Clean, fast, indexable</small></span></a>
       </div></div>
 
       <div class="col col-2"><div class="col-inner" data-loop>
-        <figure class="tile" data-hot><span class="tag">Live</span><img src="assets/mockups/site-shopify.png" alt="Storefront e-commerce website"><figcaption class="cap"><b>Storefront</b><small>E-commerce · 0.7s load</small></figcaption></figure>
-        <figure class="tile" data-hot><img src="assets/stock/web-196645.jpg" alt="Web designer at a dual-monitor desk"><figcaption class="cap"><b>Design review</b><small>Twice a week, with you</small></figcaption></figure>
-        <figure class="tile" data-hot><span class="tag">Live</span><img src="assets/mockups/site-monarch.png" alt="Almanac design studio website"><figcaption class="cap"><b>Almanac</b><small>Studio rebrand</small></figcaption></figure>
-        <figure class="tile" data-hot><img src="assets/stock/web-374074.jpg" alt="Wireframe sketches for a website"><figcaption class="cap"><b>Wireframe → live</b><small>Mapped before we build</small></figcaption></figure>
-      </div></div>
-
-      <div class="col col-3"><div class="col-inner" data-loop>
-        <figure class="tile" data-hot><span class="tag">Live</span>
-          <video muted autoplay loop playsinline preload="auto" poster="assets/web-build-poster.jpg" aria-label="Time-lapse of a website being built"><source src="assets/web-build.mp4" type="video/mp4"></video>
-          <figcaption class="cap"><b>Web build</b><small>PageSpeed 98 / 100</small></figcaption></figure>
-        <figure class="tile" data-hot><span class="tag">Live</span><img src="assets/mockups/site-apple.png" alt="Monolith product launch website"><figcaption class="cap"><b>Monolith</b><small>Product launch</small></figcaption></figure>
-        <figure class="tile" data-hot><img src="assets/stock/web-4974915.jpg" alt="Code on a screen"><figcaption class="cap"><b>Code that ranks</b><small>Clean, fast, indexable</small></figcaption></figure>
-        <figure class="tile" data-hot><span class="tag">Live</span><img src="assets/mockups/site-ramp.png" alt="Ledger contractor dashboard website"><figcaption class="cap"><b>Ledger</b><small>Contractor dashboard</small></figcaption></figure>
+        <a class="tile" data-hot href="shopify.html" aria-label="Open the Storefront site"><span class="tag">Live</span><img src="assets/mockups/site-shopify.png" alt="Storefront — e-commerce site"><span class="cap"><b>Storefront</b><small>E-commerce · open site →</small></span></a>
+        <a class="tile" data-hot href="index.html"><img src="assets/stock/web-196645.jpg" alt="Web designer at a dual-monitor desk"><span class="cap"><b>Design review</b><small>Twice a week, with you</small></span></a>
+        <a class="tile" data-hot href="monarch.html" aria-label="Open the Almanac site"><span class="tag">Live</span><img src="assets/mockups/site-monarch.png" alt="Almanac — design studio site"><span class="cap"><b>Almanac</b><small>Studio rebrand · open site →</small></span></a>
+        <a class="tile" data-hot href="index.html"><img src="assets/stock/web-374074.jpg" alt="Wireframe sketches for a website"><span class="cap"><b>Wireframe → live</b><small>Mapped before we build</small></span></a>
+        <a class="tile" data-hot href="index.html" aria-label="See all work"><span class="tag">Live</span><video muted autoplay loop playsinline preload="auto" poster="assets/web-build-poster.jpg" aria-label="Time-lapse of a website being built"><source src="assets/web-build.mp4" type="video/mp4"></video><span class="cap"><b>Web build</b><small>PageSpeed 98 / 100</small></span></a>
+        <a class="tile" data-hot href="ramp.html" aria-label="Open the Ledger site"><span class="tag">Live</span><img src="assets/mockups/site-ramp.png" alt="Ledger — contractor dashboard site"><span class="cap"><b>Ledger</b><small>Contractor dashboard · open site →</small></span></a>
       </div></div>
     </div>
 
