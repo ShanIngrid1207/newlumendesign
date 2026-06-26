@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumen Marketing — The Broadsheet · Web &amp; Software for Phoenix Contractors</title>
+<meta name="description" content="Lumen Marketing builds fast, mobile, search-ready websites and custom software for Greater Phoenix home-service and construction contractors. Sites that load under a second and turn clicks into booked jobs.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+<style>
+  :root{
+    --paper:#F7F4EC;
+    --paper-2:#F1ECE0;
+    --ink:#14130F;
+    --ink-soft:#403B30;
+    --navy:#1B2A4A;
+    --navy-soft:#2C3E63;
+    --hair:#cfc7b4;
+    --hair-strong:#b8af99;
+    --maxw:1280px;
+  }
+
+  *{box-sizing:border-box;}
+  html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Newsreader", Georgia, serif;
+    font-size:1.125rem;
+    line-height:1.55;
+    font-optical-sizing:auto;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+  }
+
+  /* faint paper grain / fiber tint */
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    pointer-events:none;
+    z-index:0;
+    background:
+      radial-gradient( circle at 18% 12%, rgba(27,42,74,0.030), transparent 42%),
+      radial-gradient(circle at 88% 80%, rgba(27,42,74,0.025), transparent 46%);
+    mix-blend-mode:multiply;
+  }
+
+  ::selection{ background:var(--navy); color:var(--paper); }
+
+  a{ color:inherit; }
+
+  h1,h2,h3,h4{ font-family:"DM Serif Display", Georgia, serif; font-weight:400; line-height:1.02; letter-spacing:-0.005em; margin:0; }
+
+  .wrap{ width:100%; max-width:var(--maxw); margin:0 auto; padding:0 clamp(18px, 4vw, 56px); position:relative; z-index:1; }
+
+  .kicker{
+    font-family:"Spline Sans Mono", monospace;
+    font-size:0.72rem;
+    letter-spacing:0.26em;
+    text-transform:uppercase;
+    color:var(--navy);
+    font-weight:600;
+    display:inline-block;
+  }
+  .mono{ font-family:"Spline Sans Mono", monospace; }
+
+  .rule{ height:1px; background:var(--hair-strong); border:0; }
+  .rule-ink{ height:2px; background:var(--ink); border:0; }
+  .rule-double{ height:5px; border-top:2px solid var(--ink); border-bottom:1px solid var(--ink); background:transparent; }
+
+  /* ---------- SKIP LINK ---------- */
+  .skip{ position:absolute; left:-9999px; top:0; background:var(--navy); color:var(--paper); padding:.6rem 1rem; z-index:100; }
+  .skip:focus{ left:12px; top:12px; }
+
+  a:focus-visible, button:focus-visible{
+    outline:2.5px solid var(--navy);
+    outline-offset:3px;
+    border-radius:1px;
+  }
+
+  /* ---------- MASTHEAD ---------- */
+  .masthead{ position:relative; z-index:5; background:var(--paper); }
+  .topbar{
+    display:flex; align-items:center; justify-content:space-between; gap:1rem;
+    padding:.5rem 0;
+    font-family:"Spline Sans Mono", monospace;
+    font-size:0.68rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--ink-soft);
+    border-bottom:1px solid var(--hair);
+  }
+  .topbar .dateline{ white-space:nowrap; }
+  .topbar .vol{ display:none; }
+  @media(min-width:760px){ .topbar .vol{ display:inline; } }
+  .topbar .weather{ display:none; }
+  @media(min-width:980px){ .topbar .weather{ display:inline; } }
+
+  .masthead-main{
+    display:flex; align-items:flex-end; justify-content:space-between; gap:1.5rem;
+    padding:clamp(.6rem,2vw,1.1rem) 0 .55rem;
+  }
+  .wordmark{
+    font-family:"DM Serif Display", serif;
+    font-size:clamp(2.6rem, 11vw, 6rem);
+    line-height:.84;
+    letter-spacing:-0.02em;
+    color:var(--ink);
+  }
+  .wordmark .dot{ color:var(--navy); }
+  .masthead-tag{
+    text-align:right;
+    font-family:"Newsreader", serif;
+    font-style:italic;
+    font-size:clamp(.8rem,1.5vw,1.02rem);
+    color:var(--ink-soft);
+    max-width:18ch;
+    line-height:1.3;
+    padding-bottom:.35rem;
+  }
+  @media(max-width:620px){ .masthead-tag{ display:none; } }
+
+  .masthead-nav{
+    display:flex; align-items:center; justify-content:space-between; gap:1rem;
+    padding:.5rem 0;
+    border-top:2px solid var(--ink);
+    border-bottom:5px double var(--ink);
+  }
+  .nav-links{ display:flex; flex-wrap:wrap; gap:clamp(.7rem,2vw,1.7rem); list-style:none; margin:0; padding:0; }
+  .nav-links a{
+    text-decoration:none;
+    font-family:"Spline Sans Mono", monospace;
+    font-size:0.72rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink);
+    padding:.25rem 0; position:relative;
+  }
+  .nav-links a::after{
+    content:""; position:absolute; left:0; bottom:-1px; height:1.5px; width:0; background:var(--navy);
+    transition:width .35s cubic-bezier(.2,.7,.3,1);
+  }
+  .nav-links a:hover::after, .nav-links a:focus-visible::after{ width:100%; }
+  @media(max-width:780px){ .nav-links{ display:none; } }
+
+  .btn{
+    display:inline-flex; align-items:center; gap:.55rem;
+    font-family:"Spline Sans Mono", monospace;
+    font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; font-weight:600;
+    text-decoration:none; cursor:pointer;
+    padding:.7rem 1.2rem;
+    background:var(--navy); color:var(--paper);
+    border:2px solid var(--navy);
+    transition:transform .25s cubic-bezier(.2,.7,.3,1), background .25s, color .25s, box-shadow .25s;
+    box-shadow:3px 3px 0 rgba(20,19,15,0);
+  }
+  .btn:hover{ background:var(--paper); color:var(--navy); box-shadow:4px 4px 0 var(--navy); transform:translate(-1px,-1px); }
+  .btn .arr{ transition:transform .25s; }
+  .btn:hover .arr{ transform:translateX(4px); }
+  .btn-ghost{ background:transparent; color:var(--ink); border:2px solid var(--ink); box-shadow:none; }
+  .btn-ghost:hover{ background:var(--ink); color:var(--paper); box-shadow:4px 4px 0 var(--navy); }
+
+  /* ---------- HERO / FRONT PAGE ---------- */
+  .hero{ padding:clamp(1.6rem,4vw,3rem) 0 clamp(1.4rem,3vw,2.4rem); }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:clamp(1.4rem,3vw,2.6rem);
+  }
+  @media(min-width:920px){
+    .hero-grid{ grid-template-columns:1.55fr 1fr; align-items:start; }
+  }
+
+  .hero-kicker-row{ display:flex; align-items:center; gap:1rem; margin-bottom:1rem; }
+  .hero-kicker-row .rule{ flex:1; }
+
+  .headline{
+    font-size:clamp(2.55rem, 9vw, 7.2rem);
+    line-height:0.94;
+    letter-spacing:-0.018em;
+  }
+  .headline .it{ font-style:italic; color:var(--navy); }
+  .line-mask{ overflow:hidden; display:block; padding-bottom:.04em; }
+  .line-inner{ display:block; }
+
+  .deck{
+    font-style:italic;
+    font-size:clamp(1.15rem,2.3vw,1.7rem);
+    line-height:1.32;
+    color:var(--ink-soft);
+    max-width:34ch;
+    margin:clamp(1rem,2.4vw,1.7rem) 0 1.3rem;
+  }
+  .byline{
+    font-family:"Spline Sans Mono", monospace;
+    font-size:.72rem; letter-spacing:.13em; text-transform:uppercase; color:var(--ink-soft);
+    display:flex; flex-wrap:wrap; gap:.4rem 1rem; align-items:center;
+    border-top:1px solid var(--hair); border-bottom:1px solid var(--hair);
+    padding:.65rem 0; margin-bottom:1.4rem;
+  }
+  .byline b{ color:var(--navy); font-weight:600; }
+
+  .lead-cols{ column-gap:clamp(1.4rem,3vw,2.4rem); column-count:1; }
+  @media(min-width:560px){ .lead-cols{ column-count:2; } }
+  .lead-cols.has-rule{ column-rule:1px solid var(--hair); }
+  .lead-cols p{ margin:0 0 1rem; }
+  .lead-cols p:last-child{ margin-bottom:0; }
+
+  .dropcap::first-letter{
+    font-family:"DM Serif Display", serif;
+    float:left;
+    font-size:4.7rem;
+    line-height:.72;
+    padding:.06em .12em 0 0;
+    margin-top:.06em;
+    color:var(--navy);
+  }
+  .hero-cta{ margin-top:1.5rem; display:flex; flex-wrap:wrap; gap:.8rem 1rem; align-items:center; }
+  .hero-cta .fineprint{ font-family:"Spline Sans Mono",monospace; font-size:.68rem; letter-spacing:.08em; color:var(--ink-soft); }
+
+  /* framed blueprint plate */
+  .plate{
+    border:2px solid var(--ink);
+    background:var(--paper-2);
+    position:relative;
+    padding:1rem;
+  }
+  .plate::after{
+    content:""; position:absolute; inset:6px; border:1px solid var(--hair-strong); pointer-events:none;
+  }
+  .plate-cap{
+    display:flex; justify-content:space-between; gap:1rem;
+    font-family:"Spline Sans Mono", monospace; font-size:.64rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--ink-soft); margin-top:.8rem; padding-top:.6rem; border-top:1px solid var(--hair);
+  }
+  .plate-cap b{ color:var(--navy); }
+  .blueprint-svg{ display:block; width:100%; height:auto; }
+
+  /* ---------- CONTENTS / INDEX STRIP ---------- */
+  .index-strip{ background:var(--navy); color:var(--paper); padding:clamp(1.3rem,3vw,2rem) 0; position:relative; z-index:1; }
+  .index-head{
+    display:flex; align-items:baseline; justify-content:space-between; gap:1rem; flex-wrap:wrap;
+    margin-bottom:1.1rem; padding-bottom:.8rem; border-bottom:1px solid rgba(247,244,236,.28);
+  }
+  .index-head h2{ font-size:clamp(1.6rem,3.4vw,2.4rem); }
+  .index-head .kicker{ color:#A9B8D6; }
+  .index-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:0; }
+  @media(min-width:760px){ .index-grid{ grid-template-columns:repeat(4,1fr); } }
+  .index-item{
+    padding:.9rem 1.1rem .9rem 0;
+    border-top:1px solid rgba(247,244,236,.18);
+  }
+  @media(min-width:760px){
+    .index-item{ border-top:0; border-left:1px solid rgba(247,244,236,.22); padding:.4rem 1.1rem; }
+    .index-item:first-child{ border-left:0; padding-left:0; }
+  }
+  .index-item .no{ font-family:"Spline Sans Mono",monospace; font-size:.66rem; letter-spacing:.2em; color:#A9B8D6; display:block; margin-bottom:.3rem; }
+  .index-item h3{ font-size:1.35rem; margin-bottom:.2rem; }
+  .index-item h3 .it{ font-style:italic; }
+  .index-item p{ font-size:.92rem; color:#D9DFEC; margin:0; line-height:1.4; }
+
+  /* ---------- SECTION SCAFFOLD ---------- */
+  .section{ padding:clamp(2.4rem,6vw,5rem) 0; }
+  .section-head{ margin-bottom:clamp(1.6rem,3vw,2.6rem); }
+  .section-head .kicker-row{ display:flex; align-items:center; gap:1rem; margin-bottom:.9rem; }
+  .section-head .kicker-row .rule{ flex:1; }
+  .section-title{ font-size:clamp(2rem,5.5vw,4rem); line-height:.98; max-width:18ch; }
+  .section-title .it{ font-style:italic; color:var(--navy); }
+
+  /* ---------- ZIG-ZAG FEATURES ---------- */
+  .feature{
+    display:grid; grid-template-columns:1fr; gap:clamp(1.4rem,3vw,3rem);
+    align-items:center;
+    padding:clamp(1.8rem,4vw,3rem) 0;
+    border-top:1px solid var(--hair);
+  }
+  .feature:first-of-type{ border-top:2px solid var(--ink); }
+  @media(min-width:880px){
+    .feature{ grid-template-columns:1fr 1fr; }
+    .feature.flip .feat-art{ order:-1; }
+  }
+  .feat-no{ font-family:"DM Serif Display",serif; font-size:clamp(2.4rem,6vw,4.2rem); color:var(--hair-strong); line-height:.8; }
+  .feat-body h3{ font-size:clamp(1.9rem,4.4vw,3.1rem); line-height:.98; margin:.4rem 0 .2rem; }
+  .feat-body h3 .it{ font-style:italic; color:var(--navy); }
+  .feat-kicker{ margin-bottom:.4rem; }
+  .feat-body p{ max-width:42ch; margin:.9rem 0; }
+  .feat-body .deck-sm{ font-style:italic; color:var(--ink-soft); font-size:1.18rem; }
+  .pullquote{
+    font-style:italic;
+    font-size:clamp(1.35rem,2.6vw,1.9rem);
+    line-height:1.18;
+    color:var(--navy);
+    border-left:3px solid var(--navy);
+    padding:.2rem 0 .2rem 1.1rem;
+    margin:1.3rem 0 1rem;
+  }
+  .pullquote cite{ display:block; font-style:normal; font-family:"Spline Sans Mono",monospace; font-size:.66rem; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-soft); margin-top:.7rem; }
+  .feat-list{ list-style:none; margin:1rem 0 0; padding:0; }
+  .feat-list li{ display:flex; gap:.7rem; padding:.45rem 0; border-bottom:1px dotted var(--hair-strong); font-size:.98rem; }
+  .feat-list li .mono{ color:var(--navy); font-size:.74rem; letter-spacing:.1em; min-width:2.6em; }
+
+  .feat-art{ position:relative; }
+  .feat-art .plate{ background:var(--paper); }
+  .feat-svg{ display:block; width:100%; height:auto; }
+
+  /* ---------- BY THE NUMBERS ---------- */
+  .numbers{ background:var(--paper-2); border-top:2px solid var(--ink); border-bottom:5px double var(--ink); }
+  .numbers-inner{ padding:clamp(2rem,4vw,3.4rem) 0; }
+  .numbers-head{ display:flex; align-items:baseline; gap:1rem; margin-bottom:1.6rem; flex-wrap:wrap; }
+  .numbers-head h2{ font-size:clamp(1.7rem,3.6vw,2.6rem); }
+  .fig-strip{ display:grid; grid-template-columns:repeat(2,1fr); gap:0; }
+  @media(min-width:820px){ .fig-strip{ grid-template-columns:repeat(4,1fr); } }
+  .fig{
+    padding:1.2rem 1.2rem 1.2rem 0;
+    border-top:1px solid var(--hair-strong);
+  }
+  @media(min-width:820px){
+    .fig{ border-top:0; border-left:1px solid var(--hair-strong); padding:.4rem 1.4rem; }
+    .fig:first-child{ border-left:0; padding-left:0; }
+  }
+  .fig .num{ font-family:"DM Serif Display",serif; font-size:clamp(2.8rem,6.5vw,4.6rem); line-height:.9; color:var(--navy); letter-spacing:-0.02em; }
+  .fig .num .it{ font-style:italic; }
+  .fig .lbl{ font-family:"Spline Sans Mono",monospace; font-size:.7rem; letter-spacing:.13em; text-transform:uppercase; color:var(--ink-soft); margin-top:.5rem; line-height:1.4; max-width:20ch; }
+
+  /* ---------- PORTFOLIO PLATES ---------- */
+  .gallery{ display:grid; grid-template-columns:repeat(2,1fr); gap:clamp(1rem,2.4vw,1.8rem); }
+  @media(min-width:760px){ .gallery{ grid-template-columns:repeat(4,1fr); } }
+  .plate-fig{ margin:0; }
+  .plate-frame{
+    border:2px solid var(--ink); background:var(--paper-2); padding:.55rem;
+    overflow:hidden; position:relative;
+  }
+  .plate-frame img{
+    display:block; width:100%; height:340px; object-fit:cover; object-position:top center;
+    filter:grayscale(100%) contrast(1.04) sepia(.10);
+    transition:filter .5s ease, transform .7s cubic-bezier(.2,.7,.3,1);
+  }
+  .plate-frame::after{
+    content:"VIEW →"; position:absolute; left:.55rem; right:.55rem; bottom:.55rem;
+    background:var(--navy); color:var(--paper);
+    font-family:"Spline Sans Mono",monospace; font-size:.64rem; letter-spacing:.18em;
+    padding:.5rem .7rem; transform:translateY(120%); transition:transform .4s cubic-bezier(.2,.7,.3,1);
+  }
+  .plate-fig:hover .plate-frame img, .plate-fig:focus-within .plate-frame img{ filter:grayscale(0%) contrast(1) sepia(0); transform:scale(1.04); }
+  .plate-fig:hover .plate-frame::after, .plate-fig:focus-within .plate-frame::after{ transform:translateY(0); }
+  .plate-fig figcaption{ margin-top:.7rem; }
+  .plate-fig .cap-title{ font-family:"DM Serif Display",serif; font-size:1.25rem; line-height:1; }
+  .plate-fig .cap-meta{ font-family:"Spline Sans Mono",monospace; font-size:.66rem; letter-spacing:.13em; text-transform:uppercase; color:var(--ink-soft); margin-top:.3rem; display:flex; justify-content:space-between; gap:.5rem; }
+  .plate-fig .cap-meta b{ color:var(--navy); }
+
+  /* ---------- TESTIMONIAL / FIELD NOTE ---------- */
+  .fieldnote{ border-top:2px solid var(--ink); border-bottom:1px solid var(--hair); padding:clamp(2rem,4vw,3.2rem) 0; }
+  .fieldnote-grid{ display:grid; grid-template-columns:1fr; gap:clamp(1.4rem,3vw,2.6rem); align-items:center; }
+  @media(min-width:820px){ .fieldnote-grid{ grid-template-columns:1.1fr .9fr; } }
+  .fieldnote blockquote{ margin:0; }
+  .fieldnote blockquote p{ font-family:"DM Serif Display",serif; font-size:clamp(1.7rem,3.8vw,2.9rem); line-height:1.06; font-style:italic; }
+  .fieldnote blockquote p .hl{ color:var(--navy); }
+  .fieldnote cite{ display:block; font-style:normal; font-family:"Spline Sans Mono",monospace; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft); margin-top:1.2rem; }
+  .fieldnote cite b{ color:var(--navy); }
+  .fieldnote-photo{ border:2px solid var(--ink); padding:.5rem; background:var(--paper-2); }
+  .fieldnote-photo img{ display:block; width:100%; height:clamp(240px,40vw,400px); object-fit:cover; filter:grayscale(100%) contrast(1.05) sepia(.08); }
+
+  /* ---------- CTA BAND ---------- */
+  .cta{ background:var(--navy); color:var(--paper); padding:clamp(2.6rem,6vw,5rem) 0; position:relative; z-index:1; overflow:hidden; }
+  .cta-inner{ display:grid; grid-template-columns:1fr; gap:clamp(1.4rem,3vw,2.4rem); align-items:end; position:relative; z-index:2; }
+  @media(min-width:880px){ .cta-inner{ grid-template-columns:1.4fr 1fr; } }
+  .cta .kicker{ color:#A9B8D6; }
+  .cta h2{ font-size:clamp(2.4rem,7vw,5.4rem); line-height:.95; }
+  .cta h2 .it{ font-style:italic; color:#C9D4EA; }
+  .cta p{ color:#D9DFEC; font-style:italic; font-size:clamp(1.05rem,2vw,1.4rem); max-width:32ch; margin:1.1rem 0 0; }
+  .cta-actions{ display:flex; flex-direction:column; gap:1rem; align-items:flex-start; }
+  .btn-paper{ background:var(--paper); color:var(--navy); border-color:var(--paper); }
+  .btn-paper:hover{ background:transparent; color:var(--paper); box-shadow:4px 4px 0 var(--paper); }
+  .cta-contact{ font-family:"Spline Sans Mono",monospace; font-size:.78rem; letter-spacing:.1em; color:#C9D4EA; }
+  .cta-contact a{ color:var(--paper); text-decoration:none; border-bottom:1px solid rgba(247,244,236,.4); }
+  .cta-watermark{
+    position:absolute; right:-2%; top:-10%; z-index:0; opacity:.10; pointer-events:none;
+    width:min(48vw, 520px); height:auto;
+  }
+  .cta-watermark path, .cta-watermark line, .cta-watermark circle, .cta-watermark polyline{ stroke:var(--paper); }
+
+  /* ---------- FOOTER COLOPHON ---------- */
+  .colophon{ padding:clamp(2.2rem,4vw,3.4rem) 0 2.4rem; }
+  .colophon .rule-double{ margin-bottom:1.6rem; }
+  .colo-top{ display:flex; flex-wrap:wrap; justify-content:space-between; gap:1.4rem 2rem; align-items:flex-start; }
+  .colo-mark{ font-family:"DM Serif Display",serif; font-size:clamp(2.4rem,6vw,3.6rem); line-height:.8; }
+  .colo-mark .dot{ color:var(--navy); }
+  .colo-cols{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.4rem 2.4rem; }
+  @media(min-width:680px){ .colo-cols{ grid-template-columns:repeat(3,auto); } }
+  .colo-cols h4{ font-family:"Spline Sans Mono",monospace; font-size:.66rem; letter-spacing:.18em; text-transform:uppercase; color:var(--navy); font-weight:600; margin-bottom:.7rem; }
+  .colo-cols ul{ list-style:none; margin:0; padding:0; }
+  .colo-cols li{ margin-bottom:.4rem; font-size:.95rem; }
+  .colo-cols a{ text-decoration:none; border-bottom:1px solid transparent; transition:border-color .25s; }
+  .colo-cols a:hover{ border-color:var(--navy); }
+  .colophon-foot{
+    display:flex; flex-wrap:wrap; justify-content:space-between; gap:.6rem 1.4rem;
+    margin-top:2rem; padding-top:1rem; border-top:1px solid var(--hair);
+    font-family:"Spline Sans Mono",monospace; font-size:.66rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-soft);
+  }
+
+  /* reveal helpers — JS sets initial state; CSS keeps content visible if JS/CDN fails */
+  .reveal{ will-change:transform,opacity; }
+
+  @media (prefers-reduced-motion: reduce){
+    .btn,.btn .arr,.plate-frame img,.plate-frame::after,.nav-links a::after{ transition:none !important; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+
+<!-- ================= MASTHEAD ================= -->
+<header class="masthead" role="banner">
+  <div class="wrap">
+    <div class="topbar">
+      <span class="dateline">Friday, June 26, 2026</span>
+      <span class="vol">Vol. I · No. 9 — The Build Issue</span>
+      <span class="weather">Phoenix · 104° &amp; Clear · Light Caseload</span>
+    </div>
+
+    <div class="masthead-main">
+      <a href="#main" class="wordmark" aria-label="Lumen Marketing — home">Lumen<span class="dot">.</span></a>
+      <p class="masthead-tag">The trade paper for contractors who want a website that actually books work.</p>
+    </div>
+
+    <nav class="masthead-nav" aria-label="Primary">
+      <ul class="nav-links">
+        <li><a href="#front">Front Page</a></li>
+        <li><a href="#desk">The Desks</a></li>
+        <li><a href="#record">By the Numbers</a></li>
+        <li><a href="#plates">Portfolio</a></li>
+        <li><a href="#colophon">Colophon</a></li>
+      </ul>
+      <a href="#cta" class="btn">Free Audit <span class="arr" aria-hidden="true">→</span></a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ================= HERO / FRONT PAGE ================= -->
+<section class="hero" id="front" aria-labelledby="hero-headline">
+  <div class="wrap">
+    <div class="hero-kicker-row">
+      <span class="kicker">Front Page · Greater Phoenix · Est. 2026</span>
+      <hr class="rule" aria-hidden="true">
+    </div>
+
+    <div class="hero-grid">
+      <!-- left: editorial column -->
+      <div>
+        <h1 class="headline" id="hero-headline">
+          <span class="line-mask"><span class="line-inner reveal">A website that</span></span>
+          <span class="line-mask"><span class="line-inner reveal">books the job —</span></span>
+          <span class="line-mask"><span class="line-inner reveal"><span class="it">not just</span></span></span>
+          <span class="line-mask"><span class="line-inner reveal"><span class="it">the click.</span></span></span>
+        </h1>
+
+        <p class="deck reveal">Fast, mobile, search-ready sites and custom software for the contractors building Greater Phoenix.</p>
+
+        <div class="byline reveal">
+          <span>Filed by <b>Lumen Marketing</b></span>
+          <span>Gilbert, Arizona</span>
+          <span>Web · Software · Brand</span>
+        </div>
+
+        <div class="lead-cols has-rule reveal">
+          <p class="dropcap">Most contractor sites lose the job before the phone ever rings — slow to load, hard to read on a truck-cab phone, and invisible the moment a homeowner searches. We build the opposite. Pages set to load in under a second, structured so Google can read them and a customer can book from them.</p>
+          <p>We work the way a good crew does: a tight scope, a clear bid, and <em>every redline answered.</em> No long-term contracts, no agency runaround. You get a site that ranks in your service area and turns a tap into a booked appointment — then the software to keep the back office moving.</p>
+        </div>
+
+        <div class="hero-cta reveal">
+          <a href="#cta" class="btn">Request a free audit <span class="arr" aria-hidden="true">→</span></a>
+          <a href="#desk" class="btn btn-ghost">Read the desks</a>
+          <span class="fineprint">No contracts · Loads &lt; 1s</span>
+        </div>
+      </div>
+
+      <!-- right: framed blueprint plate -->
+      <figure class="plate reveal" id="hero-plate" aria-labelledby="plate-cap-1">
+        <svg class="blueprint-svg" id="blueprint-house" viewBox="0 0 480 400" role="img" aria-labelledby="bp-title bp-desc">
+          <title id="bp-title">Blueprint elevation of a house</title>
+          <desc id="bp-desc">Line-art architectural elevation drawing of a single-story home with a pitched roof, drawn in the style of a blueprint.</desc>
+          <g fill="none" stroke="#14130F" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round" class="bp-draw">
+            <!-- ground line -->
+            <line x1="30" y1="350" x2="450" y2="350"/>
+            <!-- main house body -->
+            <polyline points="90,350 90,200 240,110 390,200 390,350"/>
+            <!-- roof eave overhang -->
+            <polyline points="70,212 240,96 410,212"/>
+            <!-- ridge tick -->
+            <line x1="240" y1="96" x2="240" y2="110"/>
+            <!-- door -->
+            <rect x="150" y="262" width="48" height="88"/>
+            <line x1="190" y1="306" x2="194" y2="306"/>
+            <!-- windows -->
+            <rect x="250" y="250" width="64" height="56"/>
+            <line x1="282" y1="250" x2="282" y2="306"/>
+            <line x1="250" y1="278" x2="314" y2="278"/>
+            <!-- chimney -->
+            <polyline points="320,150 320,118 348,118 348,178"/>
+          </g>
+          <g fill="none" stroke="#1B2A4A" stroke-width="1.3" stroke-linecap="round" class="bp-draw-navy">
+            <!-- dimension lines -->
+            <line x1="90" y1="372" x2="390" y2="372"/>
+            <line x1="90" y1="366" x2="90" y2="378"/>
+            <line x1="390" y1="366" x2="390" y2="378"/>
+            <!-- compass corner -->
+            <circle cx="426" cy="64" r="22"/>
+            <polyline points="426,46 432,64 426,82 420,64 426,46"/>
+            <line x1="404" y1="64" x2="448" y2="64"/>
+          </g>
+          <text x="240" y="392" text-anchor="middle" fill="#403B30" font-family="'Spline Sans Mono',monospace" font-size="11" letter-spacing="2">FIG. 1 — THE FRONT ELEVATION</text>
+        </svg>
+        <figcaption class="plate-cap" id="plate-cap-1">
+          <span>Drawing No. <b>LM-001</b></span>
+          <span>Scale <b>1:1 Conversion</b></span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTENTS / INDEX STRIP ================= -->
+<section class="index-strip" id="contents" aria-label="In this issue">
+  <div class="wrap">
+    <div class="index-head">
+      <span class="kicker">In This Issue</span>
+      <h2>Inside the <span style="font-style:italic">paper</span></h2>
+    </div>
+    <div class="index-grid">
+      <article class="index-item">
+        <span class="no">SEC. 01 / P.2</span>
+        <h3>The <span class="it">Web</span> Desk</h3>
+        <p>Sites that rank in your service area and load before a thumb taps twice.</p>
+      </article>
+      <article class="index-item">
+        <span class="no">SEC. 02 / P.3</span>
+        <h3>The <span class="it">Software</span> Desk</h3>
+        <p>Custom tools that scale the back office without the bloat.</p>
+      </article>
+      <article class="index-item">
+        <span class="no">SEC. 03 / P.4</span>
+        <h3>The <span class="it">Brand</span> Desk</h3>
+        <p>A look that sticks — so the truck, the site, and the bid all match.</p>
+      </article>
+      <article class="index-item">
+        <span class="no">SEC. 04 / P.6</span>
+        <h3>The <span class="it">Record</span></h3>
+        <p>The numbers behind 40+ shipped sites across the East Valley.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ZIG-ZAG FEATURES (THE DESKS) ================= -->
+<section class="section" id="desk" aria-labelledby="desk-title">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker-row">
+        <span class="kicker">The Desks · Sec. 01–03</span>
+        <hr class="rule" aria-hidden="true">
+      </div>
+      <h2 class="section-title" id="desk-title">Three desks, one <span class="it">deadline</span>: your next booked job.</h2>
+    </div>
+
+    <!-- FEATURE 1 — WEBSITES -->
+    <article class="feature">
+      <div class="feat-body">
+        <span class="feat-no">01</span>
+        <span class="kicker feat-kicker">The Web Desk</span>
+        <h3>Websites that <span class="it">rank</span> — and load before the thumb taps twice.</h3>
+        <p class="deck-sm">Built mobile-first for a homeowner standing in their driveway.</p>
+        <p>Every page is engineered to load in under a second and structured so Google reads it the way a customer does. Local search, clean schema, and a booking path that never makes anyone hunt for the phone number. The result is a site that earns a top-three spot in your service area and turns the click into a calendar entry.</p>
+        <blockquote class="pullquote">
+          “We don't build brochures. We build the fastest, clearest path between a search and a signed estimate.”
+          <cite>— The Web Desk</cite>
+        </blockquote>
+        <ul class="feat-list">
+          <li><span class="mono">A.</span><span>Sub-second loads, mobile-first, accessible by default.</span></li>
+          <li><span class="mono">B.</span><span>Local SEO &amp; schema tuned to your service area.</span></li>
+          <li><span class="mono">C.</span><span>One clear booking path — clicks become appointments.</span></li>
+        </ul>
+      </div>
+      <figure class="feat-art" aria-labelledby="feat1-cap">
+        <div class="plate">
+          <svg class="feat-svg" id="svg-truss" viewBox="0 0 460 300" role="img" aria-labelledby="truss-t truss-d">
+            <title id="truss-t">Roof truss diagram</title>
+            <desc id="truss-d">Engineering line drawing of a triangular roof truss with web members and gusset points.</desc>
+            <g fill="none" stroke="#14130F" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" class="bp-draw">
+              <!-- bottom chord -->
+              <line x1="40" y1="230" x2="420" y2="230"/>
+              <!-- top chords -->
+              <polyline points="40,230 230,70 420,230"/>
+              <!-- king post -->
+              <line x1="230" y1="70" x2="230" y2="230"/>
+              <!-- web members -->
+              <line x1="135" y1="150" x2="135" y2="230"/>
+              <line x1="325" y1="150" x2="325" y2="230"/>
+              <line x1="135" y1="150" x2="230" y2="230"/>
+              <line x1="325" y1="150" x2="230" y2="230"/>
+            </g>
+            <g fill="none" stroke="#1B2A4A" stroke-width="1.3" class="bp-draw-navy">
+              <!-- joint nodes -->
+              <circle cx="40" cy="230" r="5"/>
+              <circle cx="420" cy="230" r="5"/>
+              <circle cx="230" cy="70" r="5"/>
+              <circle cx="135" cy="150" r="4"/>
+              <circle cx="325" cy="150" r="4"/>
+              <!-- span dimension -->
+              <line x1="40" y1="256" x2="420" y2="256"/>
+              <line x1="40" y1="250" x2="40" y2="262"/>
+              <line x1="420" y1="250" x2="420" y2="262"/>
+            </g>
+            <text x="230" y="284" text-anchor="middle" fill="#403B30" font-family="'Spline Sans Mono',monospace" font-size="11" letter-spacing="2">FIG. 2 — LOAD-BEARING STRUCTURE</text>
+          </svg>
+          <figcaption class="plate-cap" id="feat1-cap">
+            <span>Drawing No. <b>LM-002</b></span>
+            <span>Load <b>&lt; 1.0s</b></span>
+          </figcaption>
+        </div>
+      </figure>
+    </article>
+
+    <!-- FEATURE 2 — SOFTWARE -->
+    <article class="feature flip">
+      <div class="feat-body">
+        <span class="feat-no">02</span>
+        <span class="kicker feat-kicker">The Software Desk</span>
+        <h3>Software that <span class="it">scales</span> the office, not the headcount.</h3>
+        <p class="deck-sm">Custom tools shaped to how your crew actually works.</p>
+        <p>When the spreadsheet starts running the company, we build the tool that should have replaced it. Scheduling, estimates, intake, dispatch — fitted to your process instead of forcing your process into someone else's app. It connects to the site you already have, so a lead becomes a job without anyone re-typing a thing.</p>
+        <blockquote class="pullquote">
+          “The best software is the part of the job you stop noticing — because it just runs.”
+          <cite>— The Software Desk</cite>
+        </blockquote>
+        <ul class="feat-list">
+          <li><span class="mono">A.</span><span>Scheduling, intake &amp; dispatch shaped to your workflow.</span></li>
+          <li><span class="mono">B.</span><span>Connected to your site — no double data entry.</span></li>
+          <li><span class="mono">C.</span><span>Built to grow with the crew, not against it.</span></li>
+        </ul>
+      </div>
+      <figure class="feat-art" aria-labelledby="feat2-cap">
+        <div class="plate">
+          <svg class="feat-svg" id="svg-route" viewBox="0 0 460 300" role="img" aria-labelledby="route-t route-d">
+            <title id="route-t">Service route map</title>
+            <desc id="route-d">Line-art map showing a winding service route connecting marked job-site stops across a grid.</desc>
+            <g fill="none" stroke="#cfc7b4" stroke-width="1" class="bp-grid">
+              <line x1="40" y1="60" x2="420" y2="60"/>
+              <line x1="40" y1="120" x2="420" y2="120"/>
+              <line x1="40" y1="180" x2="420" y2="180"/>
+              <line x1="40" y1="240" x2="420" y2="240"/>
+              <line x1="100" y1="40" x2="100" y2="260"/>
+              <line x1="180" y1="40" x2="180" y2="260"/>
+              <line x1="260" y1="40" x2="260" y2="260"/>
+              <line x1="340" y1="40" x2="340" y2="260"/>
+            </g>
+            <g fill="none" stroke="#1B2A4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="bp-draw-navy">
+              <!-- the route -->
+              <path d="M60,210 C120,210 120,90 200,90 S300,200 360,150 C400,118 400,80 410,70"/>
+            </g>
+            <g fill="none" stroke="#14130F" stroke-width="1.4" class="bp-draw">
+              <!-- stop pins -->
+              <circle cx="60" cy="210" r="7"/>
+              <circle cx="200" cy="90" r="7"/>
+              <circle cx="300" cy="150" r="7"/>
+              <circle cx="410" cy="70" r="7"/>
+              <line x1="60" y1="210" x2="60" y2="210.1"/>
+            </g>
+            <text x="230" y="288" text-anchor="middle" fill="#403B30" font-family="'Spline Sans Mono',monospace" font-size="11" letter-spacing="2">FIG. 3 — THE DISPATCH ROUTE</text>
+          </svg>
+          <figcaption class="plate-cap" id="feat2-cap">
+            <span>Drawing No. <b>LM-003</b></span>
+            <span>Stops <b>4 of 4 Synced</b></span>
+          </figcaption>
+        </div>
+      </figure>
+    </article>
+
+    <!-- FEATURE 3 — BRAND -->
+    <article class="feature">
+      <div class="feat-body">
+        <span class="feat-no">03</span>
+        <span class="kicker feat-kicker">The Brand Desk</span>
+        <h3>Brand that <span class="it">sticks</span> — from the truck to the bid.</h3>
+        <p class="deck-sm">One look that makes a small shop read as the established choice.</p>
+        <p>A homeowner trusts what looks consistent. We set a wordmark, a palette, and a type system that hold up everywhere your name shows — the wrap on the truck, the header on the site, the footer on the estimate. It is the difference between looking like a guy with a phone and looking like the firm that has done this a hundred times.</p>
+        <blockquote class="pullquote">
+          “Consistency reads as competence. We make sure your brand says ‘established’ before you say a word.”
+          <cite>— The Brand Desk</cite>
+        </blockquote>
+        <ul class="feat-list">
+          <li><span class="mono">A.</span><span>Wordmark, palette &amp; type that hold across every surface.</span></li>
+          <li><span class="mono">B.</span><span>Truck, site &amp; paperwork that finally match.</span></li>
+          <li><span class="mono">C.</span><span>A look that signals “established,” not “just started.”</span></li>
+        </ul>
+      </div>
+      <figure class="feat-art" aria-labelledby="feat3-cap">
+        <div class="plate">
+          <svg class="feat-svg" id="svg-compass" viewBox="0 0 400 320" role="img" aria-labelledby="comp-t comp-d">
+            <title id="comp-t">Compass rose</title>
+            <desc id="comp-d">Line-art engraving of a compass rose with cardinal points, used to suggest direction and brand orientation.</desc>
+            <g fill="none" stroke="#14130F" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" class="bp-draw">
+              <circle cx="200" cy="160" r="120"/>
+              <circle cx="200" cy="160" r="92"/>
+              <!-- minor rays -->
+              <line x1="200" y1="68" x2="200" y2="252"/>
+              <line x1="108" y1="160" x2="292" y2="160"/>
+              <line x1="135" y1="95" x2="265" y2="225"/>
+              <line x1="265" y1="95" x2="135" y2="225"/>
+            </g>
+            <g fill="none" stroke="#1B2A4A" stroke-width="1.5" stroke-linejoin="round" class="bp-draw-navy">
+              <!-- main 8-point star -->
+              <polygon points="200,52 214,146 200,160 186,146"/>
+              <polygon points="200,268 186,174 200,160 214,174"/>
+              <polygon points="92,160 186,146 200,160 186,174"/>
+              <polygon points="308,160 214,174 200,160 214,146"/>
+              <circle cx="200" cy="160" r="10"/>
+            </g>
+            <g fill="#1B2A4A" font-family="'Spline Sans Mono',monospace" font-size="13" letter-spacing="1">
+              <text x="200" y="42" text-anchor="middle">N</text>
+              <text x="200" y="290" text-anchor="middle">S</text>
+              <text x="326" y="165" text-anchor="middle">E</text>
+              <text x="74" y="165" text-anchor="middle">W</text>
+            </g>
+            <text x="200" y="308" text-anchor="middle" fill="#403B30" font-family="'Spline Sans Mono',monospace" font-size="11" letter-spacing="2">FIG. 4 — TRUE NORTH</text>
+          </svg>
+          <figcaption class="plate-cap" id="feat3-cap">
+            <span>Drawing No. <b>LM-004</b></span>
+            <span>Bearing <b>Established</b></span>
+          </figcaption>
+        </div>
+      </figure>
+    </article>
+  </div>
+</section>
+
+<!-- ================= FIELD NOTE / TESTIMONIAL ================= -->
+<section class="fieldnote" aria-label="Field note from a client">
+  <div class="wrap">
+    <div class="fieldnote-grid">
+      <blockquote>
+        <p>“The new site loaded fast, looked the part, and the calls started inside a <span class="hl">week.</span> Every change I asked for got answered the same day.”</p>
+        <cite>Reported from the field — <b>Quest Roofing</b>, Gilbert AZ</cite>
+      </blockquote>
+      <figure class="fieldnote-photo">
+        <img src="assets/stock/crew-review.jpg" alt="Two contractors in hard hats reviewing plans together on a job site." loading="lazy" width="800" height="600">
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BY THE NUMBERS ================= -->
+<section class="numbers" id="record" aria-labelledby="record-title">
+  <div class="wrap numbers-inner">
+    <div class="numbers-head">
+      <span class="kicker">The Record · Sec. 04</span>
+      <h2 id="record-title">By the <span style="font-style:italic;color:var(--navy)">numbers</span></h2>
+    </div>
+    <div class="fig-strip">
+      <div class="fig">
+        <div class="num"><span class="count" data-to="1" data-prefix="&lt;" data-suffix="s" data-decimals="0">&lt;1s</span></div>
+        <p class="lbl">Average page load — before a thumb taps twice.</p>
+      </div>
+      <div class="fig">
+        <div class="num"><span class="count" data-to="40" data-suffix="+" data-decimals="0">40+</span></div>
+        <p class="lbl">Sites shipped across the East Valley.</p>
+      </div>
+      <div class="fig">
+        <div class="num"><span class="it">Top-<span class="count" data-to="3" data-decimals="0">3</span></span></div>
+        <p class="lbl">Typical local search rank in the service area.</p>
+      </div>
+      <div class="fig">
+        <div class="num"><span class="count" data-to="0" data-decimals="0">0</span></div>
+        <p class="lbl">Long-term contracts. Every redline answered.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PORTFOLIO PLATES ================= -->
+<section class="section" id="plates" aria-labelledby="plates-title">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker-row">
+        <span class="kicker">The Portfolio · Plates I–IV</span>
+        <hr class="rule" aria-hidden="true">
+      </div>
+      <h2 class="section-title" id="plates-title">Recent <span class="it">plates</span> from the press.</h2>
+    </div>
+
+    <div class="gallery">
+      <figure class="plate-fig reveal">
+        <a class="plate-frame" href="#cta" aria-label="View the Quest Roofing project">
+          <img src="assets/mockups/site-porsche.png" alt="Tall portrait screenshot of a polished, image-led contractor website homepage." loading="lazy">
+        </a>
+        <figcaption>
+          <div class="cap-title">Quest Roofing</div>
+          <div class="cap-meta"><span>Web · SEO</span><b>Plate I</b></div>
+        </figcaption>
+      </figure>
+
+      <figure class="plate-fig reveal">
+        <a class="plate-frame" href="#cta" aria-label="View the Saguaro Cabinetry project">
+          <img src="assets/mockups/site-monarch.png" alt="Tall portrait screenshot of a warm, editorial cabinetry website homepage." loading="lazy">
+        </a>
+        <figcaption>
+          <div class="cap-title">Saguaro Cabinetry</div>
+          <div class="cap-meta"><span>Web · Brand</span><b>Plate II</b></div>
+        </figcaption>
+      </figure>
+
+      <figure class="plate-fig reveal">
+        <a class="plate-frame" href="#cta" aria-label="View the Quest Drafting and Design project">
+          <img src="assets/mockups/site-ramp.png" alt="Tall portrait screenshot of a clean, structured drafting and design website homepage." loading="lazy">
+        </a>
+        <figcaption>
+          <div class="cap-title">Quest Drafting &amp; Design</div>
+          <div class="cap-meta"><span>Web · Software</span><b>Plate III</b></div>
+        </figcaption>
+      </figure>
+
+      <figure class="plate-fig reveal">
+        <a class="plate-frame" href="#cta" aria-label="View the East Valley HVAC project">
+          <img src="assets/mockups/site-stripe.png" alt="Tall portrait screenshot of a crisp, conversion-focused HVAC website homepage." loading="lazy">
+        </a>
+        <figcaption>
+          <div class="cap-title">East Valley HVAC</div>
+          <div class="cap-meta"><span>Web · Booking</span><b>Plate IV</b></div>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA BAND ================= -->
+<section class="cta" id="cta" aria-labelledby="cta-title">
+  <svg class="cta-watermark" viewBox="0 0 400 320" aria-hidden="true" focusable="false">
+    <g fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="200" cy="160" r="120"/>
+      <circle cx="200" cy="160" r="92"/>
+      <line x1="200" y1="68" x2="200" y2="252"/>
+      <line x1="108" y1="160" x2="292" y2="160"/>
+      <polygon points="200,52 214,146 200,160 186,146"/>
+      <polygon points="200,268 186,174 200,160 214,174"/>
+    </g>
+  </svg>
+  <div class="wrap">
+    <div class="cta-inner">
+      <div>
+        <span class="kicker">The Back Page · Get in Touch</span>
+        <h2 id="cta-title">Let's set your <span class="it">front page.</span></h2>
+        <p>A free audit, a clear bid, and a site that books the job. No contracts — every redline answered.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="mailto:hello@joinlumenmarketing.com?subject=Free%20audit%20request" class="btn btn-paper">Request a free audit <span class="arr" aria-hidden="true">→</span></a>
+        <p class="cta-contact">Write the desk: <a href="mailto:hello@joinlumenmarketing.com">hello@joinlumenmarketing.com</a></p>
+        <p class="cta-contact">Greater Phoenix · Gilbert, Arizona</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER COLOPHON ================= -->
+<footer class="colophon" id="colophon" role="contentinfo">
+  <div class="wrap">
+    <hr class="rule-double" aria-hidden="true">
+    <div class="colo-top">
+      <div>
+        <div class="colo-mark">Lumen<span class="dot">.</span></div>
+        <p style="font-style:italic;color:var(--ink-soft);max-width:30ch;margin:.7rem 0 0;">Web &amp; custom software for the contractors building Greater Phoenix.</p>
+      </div>
+      <nav class="colo-cols" aria-label="Footer">
+        <div>
+          <h4>The Desks</h4>
+          <ul>
+            <li><a href="#desk">Websites</a></li>
+            <li><a href="#desk">Software</a></li>
+            <li><a href="#desk">Brand</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>The Paper</h4>
+          <ul>
+            <li><a href="#front">Front Page</a></li>
+            <li><a href="#record">By the Numbers</a></li>
+            <li><a href="#plates">Portfolio</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>The Desk</h4>
+          <ul>
+            <li><a href="mailto:hello@joinlumenmarketing.com">hello@joinlumenmarketing.com</a></li>
+            <li>Gilbert, Arizona</li>
+            <li>Greater Phoenix</li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="colophon-foot">
+      <span>© 2026 Lumen Marketing · The Broadsheet</span>
+      <span>Set in DM Serif Display · Newsreader · Spline Sans Mono</span>
+      <span>No. 9 — The Build Issue</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ran = false;
+
+  function fmt(el, val){
+    var decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+    var prefix = el.getAttribute('data-prefix') || '';
+    var suffix = el.getAttribute('data-suffix') || '';
+    // decode any HTML entities stored in attributes (e.g. &lt;)
+    var t = document.createElement('textarea');
+    t.innerHTML = prefix; prefix = t.value;
+    t.innerHTML = suffix; suffix = t.value;
+    el.textContent = prefix + val.toFixed(decimals) + suffix;
+  }
+
+  function finalCounters(){
+    document.querySelectorAll('.count').forEach(function(el){
+      var to = parseFloat(el.getAttribute('data-to') || '0');
+      fmt(el, to);
+    });
+  }
+
+  function revealAll(){
+    document.querySelectorAll('.reveal').forEach(function(el){
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    });
+    document.querySelectorAll('.line-inner').forEach(function(el){
+      el.style.transform = 'none';
+    });
+  }
+
+  function fallback(){
+    revealAll();
+    finalCounters();
+  }
+
+  function init(){
+    if(ran) return; ran = true;
+
+    if(!window.gsap || reduce){
+      fallback();
+      return;
+    }
+
+    var gsap = window.gsap;
+    if(window.ScrollTrigger){ gsap.registerPlugin(window.ScrollTrigger); }
+
+    // ---- Hero headline line-mask reveal ----
+    var lines = document.querySelectorAll('#hero-headline .line-inner');
+    gsap.set(lines, { yPercent: 115 });
+    gsap.to(lines, {
+      yPercent: 0,
+      duration: 1.0,
+      ease: 'power4.out',
+      stagger: 0.10,
+      delay: 0.15
+    });
+
+    // ---- Hero supporting elements fade-up ----
+    var heroBits = ['.hero .deck', '.hero .byline', '.hero .lead-cols', '.hero .hero-cta', '#hero-plate'];
+    heroBits.forEach(function(sel, i){
+      var el = document.querySelector(sel);
+      if(!el) return;
+      gsap.set(el, { opacity: 0, y: 26 });
+      gsap.to(el, { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', delay: 0.5 + i*0.10 });
+    });
+
+    // ---- Generic scroll reveals (non-hero) ----
+    document.querySelectorAll('.reveal').forEach(function(el){
+      if(el.closest('.hero')) return; // hero handled above
+      gsap.set(el, { opacity: 0, y: 30 });
+      gsap.to(el, {
+        opacity: 1, y: 0, duration: 0.85, ease: 'power3.out',
+        scrollTrigger: { trigger: el, start: 'top 88%' }
+      });
+    });
+
+    // ---- SVG draw-on (stroke-dashoffset) ----
+    function drawGroup(selector, opts){
+      opts = opts || {};
+      document.querySelectorAll(selector).forEach(function(svg){
+        var paths = svg.querySelectorAll('path, line, polyline, polygon, circle, rect');
+        paths.forEach(function(p){
+          var len;
+          try { len = p.getTotalLength(); } catch(e){ len = 0; }
+          if(!len || !isFinite(len)) return;
+          gsap.set(p, { strokeDasharray: len, strokeDashoffset: len });
+        });
+        gsap.to(svg.querySelectorAll('path, line, polyline, polygon, circle, rect'), {
+          strokeDashoffset: 0,
+          duration: opts.duration || 1.5,
+          ease: 'power2.inOut',
+          stagger: opts.stagger || 0.05,
+          scrollTrigger: { trigger: svg, start: opts.start || 'top 82%' }
+        });
+      });
+    }
+    drawGroup('#blueprint-house', { duration: 1.8, stagger: 0.06, start: 'top 90%' });
+    drawGroup('#svg-truss', { duration: 1.5, stagger: 0.07 });
+    drawGroup('#svg-route', { duration: 1.6, stagger: 0.06 });
+    drawGroup('#svg-compass', { duration: 1.6, stagger: 0.05 });
+
+    // ---- Count-up figures ----
+    document.querySelectorAll('.count').forEach(function(el){
+      var to = parseFloat(el.getAttribute('data-to') || '0');
+      var obj = { v: 0 };
+      // set starting display
+      fmt(el, 0);
+      gsap.to(obj, {
+        v: to,
+        duration: 1.4,
+        ease: 'power2.out',
+        scrollTrigger: { trigger: el, start: 'top 90%' },
+        onUpdate: function(){ fmt(el, obj.v); },
+        onComplete: function(){ fmt(el, to); }
+      });
+    });
+
+    // ---- Subtle parallax on hero blueprint ----
+    if(window.ScrollTrigger){
+      gsap.matchMedia().add('(min-width: 920px)', function(){
+        gsap.to('#blueprint-house', {
+          yPercent: -8,
+          ease: 'none',
+          scrollTrigger: { trigger: '#hero-plate', start: 'top bottom', end: 'bottom top', scrub: true }
+        });
+      });
+    }
+  }
+
+  // deferred GSAP loads before DOMContentLoaded — init on DOM ready
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+  // safety net: if init never ran (CDN blocked, error), reveal everything
+  setTimeout(function(){
+    if(!ran){ ran = true; fallback(); }
+    else {
+      // make sure nothing is stuck hidden
+      document.querySelectorAll('.reveal').forEach(function(el){
+        if(getComputedStyle(el).opacity === '0'){ el.style.opacity='1'; el.style.transform='none'; }
+      });
+    }
+  }, 1500);
+})();
+</script>
+</body>
+</html>
